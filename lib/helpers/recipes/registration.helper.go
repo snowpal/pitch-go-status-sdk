@@ -1,20 +1,21 @@
 package recipes
 
 import (
-	go_status "development/go/recipes/lib"
-	"development/go/recipes/lib/structs/request"
-	"development/go/recipes/lib/structs/response"
 	"fmt"
 
-	"development/go/recipes/lib/go-status/endpoints/registration"
+	"github.com/snowpal/go-status-sdk/lib"
+	"github.com/snowpal/go-status-sdk/lib/endpoints/registration"
+	"github.com/snowpal/go-status-sdk/lib/structs/request"
+	"github.com/snowpal/go-status-sdk/lib/structs/response"
+
 	log "github.com/sirupsen/logrus"
 )
 
 func RegisterUser(email string) (response.User, error) {
 	signUpReqBody := request.SignupReqBody{
 		Email:           email,
-		Password:        go_status.Password,
-		ConfirmPassword: go_status.Password,
+		Password:        lib.Password,
+		ConfirmPassword: lib.Password,
 	}
 	user, err := registration.RegisterNewUserByEmail(signUpReqBody)
 	if err != nil {

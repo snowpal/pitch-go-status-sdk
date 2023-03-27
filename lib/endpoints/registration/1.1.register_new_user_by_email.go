@@ -1,26 +1,27 @@
 package registration
 
 import (
-	go_status "development/go/recipes/lib"
-	helpers2 "development/go/recipes/lib/helpers"
-	"development/go/recipes/lib/structs/request"
-	"development/go/recipes/lib/structs/response"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/snowpal/go-status-sdk/lib"
+	"github.com/snowpal/go-status-sdk/lib/structs/request"
+	"github.com/snowpal/go-status-sdk/lib/structs/response"
+	"github.com/snowpal/go-status-sdk/lib/helpers"
 )
 
 func RegisterNewUserByEmail(reqBody request.SignupReqBody) (response.User, error) {
 	resUserRegistration := response.UserRegistration{}
-	requestBody, err := helpers2.GetRequestBody(reqBody)
+	requestBody, err := helpers.GetRequestBody(reqBody)
 	if err != nil {
 		fmt.Println(err)
 		return resUserRegistration.User, err
 	}
 	payload := strings.NewReader(requestBody)
-	route, err := helpers2.GetRoute(go_status.RouteRegistrationRegisterNewUserByEmail)
+	route, err := helpers.GetRoute(lib.RouteRegistrationRegisterNewUserByEmail)
 	if err != nil {
 		fmt.Println(err)
 		return resUserRegistration.User, err
@@ -32,15 +33,15 @@ func RegisterNewUserByEmail(reqBody request.SignupReqBody) (response.User, error
 		return resUserRegistration.User, err
 	}
 
-	helpers2.AddAppHeaders(req)
+	helpers.AddAppHeaders(req)
 
-	res, err := helpers2.MakeRequest(req)
+	res, err := helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
 		return resUserRegistration.User, err
 	}
 
-	defer helpers2.CloseBody(res.Body)
+	defer helpers.CloseBody(res.Body)
 
 	body, _ := io.ReadAll(res.Body)
 	if err != nil {

@@ -1,4 +1,4 @@
-module development/go/recipes
+module github.com/snowpal/go-status-sdk
 
 go 1.19
 

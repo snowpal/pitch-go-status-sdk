@@ -1,18 +1,19 @@
 package user
 
 import (
-	"development/go/recipes/lib/building-blocks"
-	"development/go/recipes/lib/building-blocks/helpers"
-	"development/go/recipes/lib/building-blocks/structs/response"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
+
+	"github.com/snowpal/go-status-sdk/lib"
+	"github.com/snowpal/go-status-sdk/lib/helpers"
+	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
 func GetUsers(jwtToken string) ([]response.User, error) {
 	resUsers := response.Users{}
-	route, err := helpers.GetRoute(building_blocks.RouteUserGetUsers)
+	route, err := helpers.GetRoute(lib.RouteUserGetUsers)
 	if err != nil {
 		fmt.Println(err)
 		return resUsers.Users, err

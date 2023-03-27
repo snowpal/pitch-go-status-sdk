@@ -1,26 +1,27 @@
 package comments
 
 import (
-	go_status "development/go/recipes/lib"
-	helpers2 "development/go/recipes/lib/helpers"
-	"development/go/recipes/lib/structs/request"
-	"development/go/recipes/lib/structs/response"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/snowpal/go-status-sdk/lib"
+	"github.com/snowpal/go-status-sdk/lib/helpers"
+	"github.com/snowpal/go-status-sdk/lib/structs/request"
+	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
 func AddComment(jwtToken string, reqBody request.AddCommentReqBody, statusId string) (response.Comment, error) {
 	resKey := response.Comment{}
-	requestBody, err := helpers2.GetRequestBody(reqBody)
+	requestBody, err := helpers.GetRequestBody(reqBody)
 	if err != nil {
 		fmt.Println(err)
 		return resKey, err
 	}
 	payload := strings.NewReader(requestBody)
-	route, err := helpers2.GetRoute(go_status.RoutesCommentsAddComment, statusId)
+	route, err := helpers.GetRoute(lib.RoutesCommentsAddComment, statusId)
 	if err != nil {
 		fmt.Println(err)
 		return resKey, err
@@ -31,15 +32,15 @@ func AddComment(jwtToken string, reqBody request.AddCommentReqBody, statusId str
 		return resKey, err
 	}
 
-	helpers2.AddUserHeaders(jwtToken, req)
+	helpers.AddUserHeaders(jwtToken, req)
 
-	res, err := helpers2.MakeRequest(req)
+	res, err := helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
 		return resKey, err
 	}
 
-	defer helpers2.CloseBody(res.Body)
+	defer helpers.CloseBody(res.Body)
 
 	body, _ := io.ReadAll(res.Body)
 	if err != nil {

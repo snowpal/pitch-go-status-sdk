@@ -1,12 +1,13 @@
 package registration
 
 import (
-	go_status "development/go/recipes/lib"
-	"development/go/recipes/lib/helpers"
-	"development/go/recipes/lib/structs/request"
 	"fmt"
 	"net/http"
 	"strings"
+
+	"github.com/snowpal/go-status-sdk/lib"
+	"github.com/snowpal/go-status-sdk/lib/helpers"
+	"github.com/snowpal/go-status-sdk/lib/structs/request"
 )
 
 func ResetPassword(jwtToken string, reqBody request.ResetPasswordReqBody) error {
@@ -16,7 +17,7 @@ func ResetPassword(jwtToken string, reqBody request.ResetPasswordReqBody) error 
 		return err
 	}
 	payload := strings.NewReader(requestBody)
-	route, err := helpers.GetRoute(go_status.RouteRegistrationResetPassword)
+	route, err := helpers.GetRoute(lib.RouteRegistrationResetPassword)
 	if err != nil {
 		fmt.Println(err)
 		return err

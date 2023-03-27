@@ -1,14 +1,15 @@
 package user
 
 import (
-	"development/go/recipes/lib/building-blocks"
-	"development/go/recipes/lib/building-blocks/helpers"
 	"fmt"
 	"net/http"
+
+	"github.com/snowpal/go-status-sdk/lib"
+	"github.com/snowpal/go-status-sdk/lib/helpers"
 )
 
 func DeactivateUserAccount(jwtToken string) error {
-	route, err := helpers.GetRoute(building_blocks.RouteUserDeactivateUserAccount)
+	route, err := helpers.GetRoute(lib.RouteUserDeactivateUserAccount)
 	if err != nil {
 		fmt.Println(err)
 		return err

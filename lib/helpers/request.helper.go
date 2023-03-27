@@ -1,13 +1,14 @@
 package helpers
 
 import (
-	"development/go/recipes/lib/building-blocks"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"golang.org/x/exp/slices"
 	"net/http"
 	"strings"
+
+	"github.com/snowpal/go-status-sdk/lib"
+	"golang.org/x/exp/slices"
 )
 
 func AddUserHeaders(jwtToken string, req *http.Request) {
@@ -27,7 +28,7 @@ func GetRoute(route string, args ...string) (string, error) {
 	for _, arg := range args {
 		route = strings.Replace(route, "%s", arg, 1)
 	}
-	res = building_blocks.GatewayHost + route
+	res = lib.GatewayHost + route
 	return res, nil
 }
 
@@ -45,8 +46,8 @@ func GetRequestBody(obj interface{}) (string, error) {
 // Private Methods
 
 func addHeaders(req *http.Request) {
-	req.Header.Add("x-api-key", building_blocks.XApiKey)
-	req.Header.Add("x-snowpal-product-code", building_blocks.XProductCode)
+	req.Header.Add("x-api-key", lib.XApiKey)
+	req.Header.Add("x-snowpal-product-code", lib.XProductCode)
 	req.Header.Add("Content-Type", "application/json")
 }
 
