@@ -15,7 +15,11 @@ const (
 )
 
 const (
-	RoutesCommentsAddComment = "/status/%s/comments"
+	RouteCommentsAddComment    = "/status/%s/comments"
+	RouteCommentsGetComments   = "/status/%s/comments"
+	RouteCommentsGetComment    = "/status/%s/comments/%s"
+	RouteCommentsUpdateComment = "/status/%s/comments/%s"
+	RouteCommentsDeleteComment = "/status/%s/comments/%s"
 )
 
 const (
@@ -25,6 +29,5 @@ const (
 const (
 	RouteUserGetUsers              = "users"
 	RouteUserGetUserByUuid         = "users/uuid/%s"
-	RouteUserGetUserByEmail        = "users/email/%s"
 	RouteUserDeactivateUserAccount = "users/deactivate-account"
 )

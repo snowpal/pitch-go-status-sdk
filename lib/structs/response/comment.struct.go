@@ -6,5 +6,5 @@ type Comments struct {
 
 type Comment struct {
 	ID          string `json:"id"`
-	CommentText string `jsong:"commentText"`
+	CommentText string `json:"commentText"`
 }

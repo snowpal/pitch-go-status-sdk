@@ -1,5 +1,10 @@
 package request
 
-type AddCommentReqBody struct {
-	CommentText string `jsong:"commentText"`
+type CommentReqBody struct {
+	CommentText string `json:"commentText"`
+}
+
+type CommentParam struct {
+	StatusId  string
+	CommentId string
 }

@@ -15,7 +15,8 @@ func ActivateUser(userId string) error {
 		return err
 	}
 
-	req, err := http.NewRequest(http.MethodPatch, route, nil)
+	var req *http.Request
+	req, err = http.NewRequest(http.MethodPatch, route, nil)
 	if err != nil {
 		fmt.Println(err)
 		return err

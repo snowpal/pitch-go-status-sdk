@@ -32,15 +32,14 @@ func GetRoute(route string, args ...string) (string, error) {
 	return res, nil
 }
 
-func GetRequestBody(obj interface{}) (string, error) {
-	var res string
+func GetRequestPayload(obj interface{}) (*strings.Reader, error) {
+	var payload *strings.Reader
 	marshaled, err := json.Marshal(obj)
 	if err != nil {
-		return res, err
+		return payload, err
 	}
-
-	res = string(marshaled)
-	return res, nil
+	payload = strings.NewReader(string(marshaled))
+	return payload, nil
 }
 
 // Private Methods
