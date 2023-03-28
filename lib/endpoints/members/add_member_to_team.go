@@ -29,7 +29,7 @@ func AddMemberToTeam(jwtToken string, reqBody request.TeamMemberReqBody, teamId 
 	}
 
 	var req *http.Request
-	req, err = http.NewRequest(http.MethodPost, route, payload)
+	req, err = http.NewRequest(http.MethodPatch, route, payload)
 	if err != nil {
 		fmt.Println(err)
 		return resMember, err
