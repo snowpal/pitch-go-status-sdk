@@ -54,7 +54,7 @@ const (
 )
 
 const (
-	RoutesMetaGetStatusFilters = "/status/%s/filters"
+	RoutesMetaGetStatusFilters = "/status/filters"
 )
 
 const (
@@ -78,12 +78,24 @@ const (
 )
 
 const (
-	RouteStatusesAddMemberStatus      = "/members/%s/statuses"
+	RouteStatusesAddMyStatus          = "/statuses"
 	RouteStatusesGetMemberStatuses    = "/members/%s/statuses"
+	RouteStatusesGetMyStatuses        = "/statuses"
 	RouteStatusesGetMemberStatus      = "/members/%s/statuses/%s"
+	RouteStatusesGetMyStatus          = "/statuses/%s"
 	RouteStatusesGetTeamStatuses      = "/teams/%s/statuses"
 	RouteStatusesGetAllTeamStatuses   = "/teams/statuses"
 	RouteStatusesUpdateMemberStatus   = "/members/%s/statuses/%s"
+	RouteStatusesUpdateMyStatus       = "/statuses/%s"
+	RouteStatusesDeleteMemberStatus   = "/members/%s/statuses/%s"
+	RouteStatusesDeleteMyStatus       = "/statuses/%s"
 	RouteStatusesDeleteMemberStatuses = "/members/%s/statuses"
+	RouteStatusesDeleteMyStatuses     = "/statuses"
 	RouteStatusesDeleteTeamStatuses   = "/teams/%s/statuses"
+)
+
+const (
+	RouteSearchSrchStatuses = "/search/statuses"
+	RouteSearchSrchTeams    = "/search/teams"
+	RouteSearchSrchMembers  = "/search/members"
 )

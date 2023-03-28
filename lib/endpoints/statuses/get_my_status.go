@@ -8,28 +8,20 @@ import (
 
 	"github.com/snowpal/go-status-sdk/lib"
 	"github.com/snowpal/go-status-sdk/lib/helpers"
-	"github.com/snowpal/go-status-sdk/lib/structs/request"
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func AddMemberStatus(jwtToken string, reqBody request.StatusReqBody, memberId string) (response.Status, error) {
+func GetMyStatus(jwtToken string, statusId string) (response.Status, error) {
 	var resStatus response.Status
 
-	payload, err := helpers.GetRequestPayload(reqBody)
-	if err != nil {
-		fmt.Println(err)
-		return resStatus, err
-	}
-
-	var route string
-	route, err = helpers.GetRoute(lib.RouteStatusesAddMemberStatus, memberId)
+	route, err := helpers.GetRoute(lib.RouteStatusesGetMyStatus, statusId)
 	if err != nil {
 		fmt.Println(err)
 		return resStatus, err
 	}
 
 	var req *http.Request
-	req, err = http.NewRequest(http.MethodPost, route, payload)
+	req, err = http.NewRequest(http.MethodGet, route, nil)
 	if err != nil {
 		fmt.Println(err)
 		return resStatus, err

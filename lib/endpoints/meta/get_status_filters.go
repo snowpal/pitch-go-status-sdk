@@ -11,20 +11,20 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func GetStatusFilters(jwtToken string, statusId string) ([]response.Comment, error) {
-	var resComments response.Comments
+func GetStatusFilters(jwtToken string) ([]response.Status, error) {
+	var resStatuses response.Statuses
 
-	route, err := helpers.GetRoute(lib.RoutesMetaGetStatusFilters, statusId)
+	route, err := helpers.GetRoute(lib.RoutesMetaGetStatusFilters)
 	if err != nil {
 		fmt.Println(err)
-		return resComments.Comments, err
+		return resStatuses.Statuses, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodGet, route, nil)
 	if err != nil {
 		fmt.Println(err)
-		return resComments.Comments, err
+		return resStatuses.Statuses, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -33,7 +33,7 @@ func GetStatusFilters(jwtToken string, statusId string) ([]response.Comment, err
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resComments.Comments, err
+		return resStatuses.Statuses, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -42,13 +42,13 @@ func GetStatusFilters(jwtToken string, statusId string) ([]response.Comment, err
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resComments.Comments, err
+		return resStatuses.Statuses, err
 	}
 
-	err = json.Unmarshal(body, &resComments)
+	err = json.Unmarshal(body, &resStatuses)
 	if err != nil {
 		fmt.Println(err)
-		return resComments.Comments, err
+		return resStatuses.Statuses, err
 	}
-	return resComments.Comments, nil
+	return resStatuses.Statuses, nil
 }

@@ -8,8 +8,8 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/helpers"
 )
 
-func DeleteMemberStatuses(jwtToken string, memberId string) error {
-	route, err := helpers.GetRoute(lib.RouteStatusesDeleteMemberStatuses, memberId)
+func DeleteMyStatuses(jwtToken string) error {
+	route, err := helpers.GetRoute(lib.RouteStatusesDeleteMyStatuses)
 	if err != nil {
 		fmt.Println(err)
 		return err

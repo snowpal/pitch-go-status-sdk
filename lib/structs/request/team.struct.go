@@ -4,7 +4,12 @@ type TeamReqBody struct {
 	Name string `json:"name"`
 }
 
-type TeamMemberReqBody struct {
+type AddMemberReqBody struct {
+	UserId string `json:"userId"`
+	Name   string `json:"name"`
+}
+
+type UpdateMemberReqBody struct {
 	Name string `json:"name"`
 }
 
