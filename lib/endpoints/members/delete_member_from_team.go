@@ -17,7 +17,7 @@ func DeleteMemberFromTeam(jwtToken string, param request.TeamMemberParam) error 
 	}
 
 	var req *http.Request
-	req, err = http.NewRequest(http.MethodPatch, route, nil)
+	req, err = http.NewRequest(http.MethodDelete, route, nil)
 	if err != nil {
 		fmt.Println(err)
 		return err
