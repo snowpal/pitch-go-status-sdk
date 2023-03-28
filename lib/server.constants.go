@@ -15,16 +15,34 @@ const (
 )
 
 const (
-	RoutesCommentsAddComment = "/status/%s/comments"
+	RouteUserGetUsers              = "users"
+	RouteUserGetUserByUuid         = "users/uuid/%s"
+	RouteUserDeactivateUserAccount = "users/deactivate-account"
+)
+
+const (
+	RouteTeamsAddTeam    = "/teams"
+	RouteTeamsGetTeams   = "/teams"
+	RouteTeamsGetTeam    = "/teams/%s"
+	RouteTeamsUpdateTeam = "/teams/%s"
+	RouteTeamsDeleteTeam = "/teams/%s"
+)
+
+const (
+	RouteRolesAddRole    = "/roles"
+	RouteRolesGetRoles   = "/roles"
+	RouteRolesUpdateRole = "/roles/%s"
+	RouteRolesDeleteRole = "/roles/%s"
+)
+
+const (
+	RouteCommentsAddComment    = "/status/%s/comments"
+	RouteCommentsGetComments   = "/status/%s/comments"
+	RouteCommentsGetComment    = "/status/%s/comments/%s"
+	RouteCommentsUpdateComment = "/status/%s/comments/%s"
+	RouteCommentsDeleteComment = "/status/%s/comments/%s"
 )
 
 const (
 	RoutesMetaGetStatusFilters = "/status/%s/comments"
-)
-
-const (
-	RouteUserGetUsers              = "users"
-	RouteUserGetUserByUuid         = "users/uuid/%s"
-	RouteUserGetUserByEmail        = "users/email/%s"
-	RouteUserDeactivateUserAccount = "users/deactivate-account"
 )
