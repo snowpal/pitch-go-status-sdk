@@ -11,10 +11,10 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func GetMemberStatuses(jwtToken string, memberId string) ([]response.Status, error) {
+func GetTeamStatuses(jwtToken string, teamId string) ([]response.Status, error) {
 	var resStatuses response.Statuses
 
-	route, err := helpers.GetRoute(lib.RouteStatusesGetMemberStatuses, memberId)
+	route, err := helpers.GetRoute(lib.RouteStatusesGetTeamStatuses, teamId)
 	if err != nil {
 		fmt.Println(err)
 		return resStatuses.Statuses, err

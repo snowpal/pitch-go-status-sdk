@@ -2,14 +2,15 @@ package statuses
 
 import (
 	"fmt"
+	"net/http"
+
 	"github.com/snowpal/go-status-sdk/lib"
 	"github.com/snowpal/go-status-sdk/lib/helpers"
 	"github.com/snowpal/go-status-sdk/lib/structs/request"
-	"net/http"
 )
 
-func DeleteMemberStatus(jwtToken string, param request.TeamMemberParam) error {
-	route, err := helpers.GetRoute(lib.RouteMembersDeleteTeamMember, param.TeamId, param.MemberId)
+func DeleteMemberStatus(jwtToken string, param request.MemberStatusParam) error {
+	route, err := helpers.GetRoute(lib.RouteStatusesDeleteMemberStatus, param.MemberId, param.StatusId)
 	if err != nil {
 		fmt.Println(err)
 		return err
