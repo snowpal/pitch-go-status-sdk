@@ -29,6 +29,16 @@ const (
 )
 
 const (
+	RouteMembersAddMemberToTeam      = "/teams/%s/members"
+	RouteMembersGetTeamMembers       = "/teams/%s/members"
+	RouteMembersGetTeamMember        = "/teams/%s/members/%s"
+	RouteMembersGetBlockedMembers    = "/teams/%s/members/blocked"
+	RouteMembersGetAllBlockedMembers = "/teams/members/blocked"
+	RouteMembersUpdateTeamMember     = "/teams/%s/members/%s"
+	RouteMembersDeleteTeamMember     = "/teams/%s/members/%s"
+)
+
+const (
 	RouteRolesAddRole    = "/roles"
 	RouteRolesGetRoles   = "/roles"
 	RouteRolesUpdateRole = "/roles/%s"
@@ -44,5 +54,36 @@ const (
 )
 
 const (
-	RoutesMetaGetStatusFilters = "/status/%s/comments"
+	RoutesMetaGetStatusFilters = "/status/%s/filters"
+)
+
+const (
+	RouteProfilesGetProfile    = "/profiles/%s"
+	RouteProfilesUpdateProfile = "/profiles/%s"
+)
+
+const (
+	RoutePullRequestsGetTeamPullRequests   = "/teams/%s/pull-requests"
+	RoutePullRequestsGetMemberPullRequests = "/members/%s/pull-requests"
+)
+
+const (
+	RouteStoryPointsGetTeamStoryPoints   = "/teams/%s/story-points"
+	RouteStoryPointsGetMemberStoryPoints = "/members/%s/story-points"
+)
+
+const (
+	RouteTicketsGetTeamTickets   = "/teams/%s/tickets"
+	RouteTicketsGetMemberTickets = "/members/%s/story-points"
+)
+
+const (
+	RouteStatusesAddMemberStatus      = "/members/%s/statuses"
+	RouteStatusesGetMemberStatuses    = "/members/%s/statuses"
+	RouteStatusesGetMemberStatus      = "/members/%s/statuses/%s"
+	RouteStatusesGetTeamStatuses      = "/teams/%s/statuses"
+	RouteStatusesGetAllTeamStatuses   = "/teams/statuses"
+	RouteStatusesUpdateMemberStatus   = "/members/%s/statuses/%s"
+	RouteStatusesDeleteMemberStatuses = "/members/%s/statuses"
+	RouteStatusesDeleteTeamStatuses   = "/teams/%s/statuses"
 )

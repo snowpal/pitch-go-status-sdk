@@ -9,11 +9,12 @@ type Team struct {
 	Name string `json:"name"`
 }
 
-type Roles struct {
-	Roles []Role `json:"roles"`
+type Members struct {
+	Members []Member `json:"members"`
 }
 
-type Role struct {
-	ID    string `json:"id"`
-	Title string `json:"title"`
+type Member struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+	Team Team   `json:"team"`
 }
