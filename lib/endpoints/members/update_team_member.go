@@ -14,7 +14,7 @@ import (
 
 func UpdateTeamMember(
 	jwtToken string,
-	reqBody request.TeamMemberReqBody,
+	reqBody request.UpdateMemberReqBody,
 	param request.TeamMemberParam,
 ) (response.Member, error) {
 	var resMember response.Member

@@ -87,3 +87,9 @@ const (
 	RouteStatusesDeleteMemberStatuses = "/members/%s/statuses"
 	RouteStatusesDeleteTeamStatuses   = "/teams/%s/statuses"
 )
+
+const (
+	RouteSearchSrchStatuses = "/search/statuses"
+	RouteSearchSrchTeams    = "/search/teams"
+	RouteSearchSrchMembers  = "/search/members"
+)

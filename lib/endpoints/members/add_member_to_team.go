@@ -12,7 +12,7 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func AddMemberToTeam(jwtToken string, reqBody request.TeamMemberReqBody, teamId string) (response.Member, error) {
+func AddMemberToTeam(jwtToken string, reqBody request.AddMemberReqBody, teamId string) (response.Member, error) {
 	var resMember response.Member
 
 	payload, err := helpers.GetRequestPayload(reqBody)
