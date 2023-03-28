@@ -44,5 +44,25 @@ const (
 )
 
 const (
-	RoutesMetaGetStatusFilters = "/status/%s/comments"
+	RoutesMetaGetStatusFilters = "/status/%s/filters"
+)
+
+const (
+	RouteProfilesGetProfile    = "/profiles/%s"
+	RouteProfilesUpdateProfile = "/profiles/%s"
+)
+
+const (
+	RoutePullRequestsGetTeamPullRequests   = "/teams/%s/pull-requests"
+	RoutePullRequestsGetMemberPullRequests = "/members/%s/pull-requests"
+)
+
+const (
+	RouteStoryPointsGetTeamStoryPoints   = "/teams/%s/story-points"
+	RouteStoryPointsGetMemberStoryPoints = "/members/%s/story-points"
+)
+
+const (
+	RouteTicketsGetTeamTickets   = "/teams/%s/tickets"
+	RouteTicketsGetMemberTickets = "/members/%s/story-points"
 )
