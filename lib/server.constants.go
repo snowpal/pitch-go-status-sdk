@@ -76,3 +76,14 @@ const (
 	RouteTicketsGetTeamTickets   = "/teams/%s/tickets"
 	RouteTicketsGetMemberTickets = "/members/%s/story-points"
 )
+
+const (
+	RouteStatusesAddMemberStatus      = "/members/%s/statuses"
+	RouteStatusesGetMemberStatuses    = "/members/%s/statuses"
+	RouteStatusesGetMemberStatus      = "/members/%s/statuses/%s"
+	RouteStatusesGetTeamStatuses      = "/teams/%s/statuses"
+	RouteStatusesGetAllTeamStatuses   = "/teams/statuses"
+	RouteStatusesUpdateMemberStatus   = "/members/%s/statuses/%s"
+	RouteStatusesDeleteMemberStatuses = "/members/%s/statuses"
+	RouteStatusesDeleteTeamStatuses   = "/teams/%s/statuses"
+)
