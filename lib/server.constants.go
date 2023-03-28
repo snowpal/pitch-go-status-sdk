@@ -54,7 +54,7 @@ const (
 )
 
 const (
-	RoutesMetaGetStatusFilters = "/status/%s/filters"
+	RoutesMetaGetStatusFilters = "/status/filters"
 )
 
 const (

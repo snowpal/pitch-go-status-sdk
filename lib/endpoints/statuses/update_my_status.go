@@ -21,7 +21,8 @@ func UpdateMyStatus(jwtToken string, reqBody request.StatusReqBody, statusId str
 		return resStatus, err
 	}
 
-	route, err := helpers.GetRoute(lib.RouteStatusesUpdateMyStatus, statusId)
+	var route string
+	route, err = helpers.GetRoute(lib.RouteStatusesUpdateMyStatus, statusId)
 	if err != nil {
 		fmt.Println(err)
 		return resStatus, err
