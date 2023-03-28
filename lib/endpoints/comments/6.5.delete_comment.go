@@ -11,6 +11,10 @@ import (
 
 func DeleteComment(jwtToken string, param request.CommentParam) error {
 	route, err := helpers.GetRoute(lib.RouteCommentsDeleteComment, param.StatusId, param.CommentId)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodDelete, route, nil)

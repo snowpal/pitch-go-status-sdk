@@ -13,25 +13,26 @@ import (
 )
 
 func AddComment(jwtToken string, reqBody request.CommentReqBody, statusId string) (response.Comment, error) {
-	resKey := response.Comment{}
+	var resComment response.Comment
+
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
 		fmt.Println(err)
-		return resKey, err
+		return resComment, err
 	}
 
 	var route string
 	route, err = helpers.GetRoute(lib.RouteCommentsAddComment, statusId)
 	if err != nil {
 		fmt.Println(err)
-		return resKey, err
+		return resComment, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodPost, route, payload)
 	if err != nil {
 		fmt.Println(err)
-		return resKey, err
+		return resComment, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -40,7 +41,7 @@ func AddComment(jwtToken string, reqBody request.CommentReqBody, statusId string
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resKey, err
+		return resComment, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -49,13 +50,13 @@ func AddComment(jwtToken string, reqBody request.CommentReqBody, statusId string
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resKey, err
+		return resComment, err
 	}
 
-	err = json.Unmarshal(body, &resKey)
+	err = json.Unmarshal(body, &resComment)
 	if err != nil {
 		fmt.Println(err)
-		return resKey, err
+		return resComment, err
 	}
-	return resKey, nil
+	return resComment, nil
 }

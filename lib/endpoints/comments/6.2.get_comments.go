@@ -12,7 +12,8 @@ import (
 )
 
 func GetComments(jwtToken string, statusId string) ([]response.Comment, error) {
-	resComments := response.Comments{}
+	var resComments response.Comments
+
 	route, err := helpers.GetRoute(lib.RouteCommentsGetComments, statusId)
 	if err != nil {
 		fmt.Println(err)

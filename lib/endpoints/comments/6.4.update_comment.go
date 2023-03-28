@@ -13,7 +13,7 @@ import (
 )
 
 func UpdateComment(jwtToken string, reqBody request.CommentReqBody, param request.CommentParam) (response.Comment, error) {
-	resComment := response.Comment{}
+	var resComment response.Comment
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
