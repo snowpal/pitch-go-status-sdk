@@ -29,6 +29,16 @@ const (
 )
 
 const (
+	RouteMembersAddMemberToTeam      = "/teams/%s/members"
+	RouteMembersGetTeamMembers       = "/teams/%s/members"
+	RouteMembersGetTeamMember        = "/teams/%s/members/%s"
+	RouteMembersGetBlockedMembers    = "/teams/%s/members/blocked"
+	RouteMembersGetAllBlockedMembers = "/teams/members/blocked"
+	RouteMembersUpdateTeamMember     = "/teams/%s/members/%s"
+	RouteMembersDeleteTeamMember     = "/teams/%s/members/%s"
+)
+
+const (
 	RouteRolesAddRole    = "/roles"
 	RouteRolesGetRoles   = "/roles"
 	RouteRolesUpdateRole = "/roles/%s"
