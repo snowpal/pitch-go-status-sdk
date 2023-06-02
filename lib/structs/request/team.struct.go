@@ -9,10 +9,6 @@ type AddMemberReqBody struct {
 	Name   string `json:"name"`
 }
 
-type UpdateMemberReqBody struct {
-	Name string `json:"name"`
-}
-
 type TeamMemberParam struct {
 	TeamId   string
 	MemberId string

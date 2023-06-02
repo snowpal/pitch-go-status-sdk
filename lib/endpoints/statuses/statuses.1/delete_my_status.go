@@ -1,4 +1,4 @@
-package members
+package statuses
 
 import (
 	"fmt"
@@ -9,8 +9,8 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/request"
 )
 
-func DeleteMemberFromTeam(jwtToken string, param request.TeamMemberParam) error {
-	route, err := helpers.GetRoute(lib.RouteMembersDeleteMemberFromTeam, param.TeamId, param.MemberId)
+func DeleteMyStatus(jwtToken string, statusParam request.StatusParam) error {
+	route, err := helpers.GetRoute(lib.RouteStatusesDeleteMyStatus, statusParam.TeamId, statusParam.StatusId)
 	if err != nil {
 		fmt.Println(err)
 		return err

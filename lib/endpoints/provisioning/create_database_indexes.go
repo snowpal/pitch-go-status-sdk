@@ -6,18 +6,17 @@ import (
 
 	"github.com/snowpal/go-status-sdk/lib"
 	"github.com/snowpal/go-status-sdk/lib/helpers"
-	"github.com/snowpal/go-status-sdk/lib/structs/request"
 )
 
-func DeleteMemberFromTeam(jwtToken string, param request.TeamMemberParam) error {
-	route, err := helpers.GetRoute(lib.RouteMembersDeleteMemberFromTeam, param.TeamId, param.MemberId)
+func CreateDatabaseIndexes(jwtToken string) error {
+	route, err := helpers.GetRoute(lib.RouteMembersAddMemberToTeam)
 	if err != nil {
 		fmt.Println(err)
 		return err
 	}
 
 	var req *http.Request
-	req, err = http.NewRequest(http.MethodDelete, route, nil)
+	req, err = http.NewRequest(http.MethodPatch, route, nil)
 	if err != nil {
 		fmt.Println(err)
 		return err
@@ -30,5 +29,6 @@ func DeleteMemberFromTeam(jwtToken string, param request.TeamMemberParam) error 
 		fmt.Println(err)
 		return err
 	}
+
 	return nil
 }

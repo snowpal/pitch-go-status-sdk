@@ -5,7 +5,20 @@ type StatusReqBody struct {
 	TaggedMemberIds string `json:"taggedMemberIds"`
 }
 
-type MemberStatusParam struct {
-	MemberId string
-	StatusId string
+type StatusOtherItemsReqBody struct {
+	OtherStatusItems []string `json:"otherItems"`
+}
+
+type TeamParam struct {
+	TeamId string
+}
+
+type StatusParam struct {
+	TeamId    string
+	StatusId  string
+	StartDate string
+	EndDate   string
+	SessionId string
+	MemberId  string
+	TicketId  string
 }
