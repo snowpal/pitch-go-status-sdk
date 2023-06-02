@@ -12,7 +12,7 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func AddMyStatus(jwtToken string, reqBody request.StatusReqBody, teamParam request.TeamParam) (response.Status, error) {
+func AddMyStatus(jwtToken string, reqBody request.StatusReqBody, statusParam request.TeamParam) (response.Status, error) {
 	var resStatus response.Status
 
 	payload, err := helpers.GetRequestPayload(reqBody)
