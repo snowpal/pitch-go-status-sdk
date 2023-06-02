@@ -1,12 +1,19 @@
 package main
 
 import (
+	"github.com/snowpal/go-status-sdk/lib/config"
 	"github.com/snowpal/go-status-sdk/lib/recipes"
 
 	log "github.com/sirupsen/logrus"
 )
 
 func main() {
+	var err error
+	if config.Files, err = config.InitConfigFiles(); err != nil {
+		log.Fatal(err.Error())
+		return
+	}
+	
 	recipeID := 1
 	switch recipeID {
 	case 1:
