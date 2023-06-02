@@ -12,7 +12,7 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func GetMemberStatus(jwtToken string, param request.MemberStatusParam) (response.Status, error) {
+func GetMemberStatus(jwtToken string, param request.StatusParam) (response.Status, error) {
 	var resStatus response.Status
 
 	route, err := helpers.GetRoute(lib.RouteStatusesGetMemberStatus, param.MemberId, param.StatusId)

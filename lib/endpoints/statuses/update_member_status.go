@@ -15,7 +15,7 @@ import (
 func UpdateMemberStatus(
 	jwtToken string,
 	reqBody request.StatusReqBody,
-	param request.MemberStatusParam,
+	param request.StatusParam,
 ) (response.Status, error) {
 	var resStatus response.Status
 
