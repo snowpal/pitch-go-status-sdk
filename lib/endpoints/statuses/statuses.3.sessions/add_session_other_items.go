@@ -16,13 +16,13 @@ func AddSessionOtherItems(
 	jwtToken string,
 	reqBody request.StatusSessionOtherItemsReqBody,
 	sessionParam request.SessionParam,
-) (response.Status, error) {
-	var resStatus response.Status
+) ([]response.SessionOtherItem, error) {
+	var resOtherItems response.SessionOtherItems
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems.OtherItems, err
 	}
 
 	var route string
@@ -34,14 +34,14 @@ func AddSessionOtherItems(
 	)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems.OtherItems, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodPatch, route, payload)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems.OtherItems, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -50,7 +50,7 @@ func AddSessionOtherItems(
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems.OtherItems, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -59,13 +59,13 @@ func AddSessionOtherItems(
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems.OtherItems, err
 	}
 
-	err = json.Unmarshal(body, &resStatus)
+	err = json.Unmarshal(body, &resOtherItems)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems.OtherItems, err
 	}
-	return resStatus, nil
+	return resOtherItems.OtherItems, nil
 }

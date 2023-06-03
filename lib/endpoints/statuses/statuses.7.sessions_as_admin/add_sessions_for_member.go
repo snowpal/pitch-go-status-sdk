@@ -16,13 +16,13 @@ func AddSessionsForMember(
 	jwtToken string,
 	reqBody request.AddSessionsReqBody,
 	statusParam request.StatusParam,
-) (response.Status, error) {
-	var resStatus response.Status
+) ([]response.Session, error) {
+	var resSessions response.Sessions
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resSessions.Sessions, err
 	}
 
 	var route string
@@ -34,14 +34,14 @@ func AddSessionsForMember(
 	)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resSessions.Sessions, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodPost, route, payload)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resSessions.Sessions, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -50,7 +50,7 @@ func AddSessionsForMember(
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resSessions.Sessions, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -59,13 +59,13 @@ func AddSessionsForMember(
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resSessions.Sessions, err
 	}
 
-	err = json.Unmarshal(body, &resStatus)
+	err = json.Unmarshal(body, &resSessions.Sessions)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resSessions.Sessions, err
 	}
-	return resStatus, nil
+	return resSessions.Sessions, nil
 }

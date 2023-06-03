@@ -3,11 +3,11 @@ package request
 import "github.com/snowpal/go-status-sdk/lib/structs/common"
 
 type AddSessionsReqBody struct {
-	Sessions []common.Session `json:"sessions"`
+	Sessions []SessionReqBody `json:"sessions"`
 }
 
 type StatusSessionOtherItemsReqBody struct {
-	SessionOtherItems []common.SessionOtherItemReqBody `json:"otherItems"`
+	OtherItems []SessionOtherItemReqBody `json:"otherItems"`
 }
 
 type AddSessionTicketsReqBody struct {
@@ -15,21 +15,32 @@ type AddSessionTicketsReqBody struct {
 }
 
 type SessionTicketReqBody struct {
-	ID            string                `json:"ticketID"`
+	TicketID      string                `json:"ticketID"`
 	Type          string                `json:"type"`
 	Url           string                `json:"url"`
 	Description   string                `json:"description"`
 	Status        string                `json:"status"`
 	TimeSpent     float32               `json:"timeSpent"`
-	PullRequest   PullRequest           `json:"pullRequest"`
+	PullRequest   common.PullRequest    `json:"pullRequest"`
 	PairedMembers []common.PairedMember `json:"pairedWith"`
 }
 
 type AddTicketsReqBody struct {
-	Tickets []common.TicketReqBody `json:"tickets"`
+	Tickets []TicketReqBody `json:"tickets"`
 }
 
-type PullRequest struct {
-	Url         string `json:"url"`
-	Description string `json:"description"`
+type TicketParam struct {
+	TeamId    string
+	MemberId  string
+	StatusId  string
+	SessionId string
+	TicketId  string
+}
+
+type OtherItemParam struct {
+	TeamId      string
+	MemberId    string
+	StatusId    string
+	SessionId   string
+	OtherItemId string
 }

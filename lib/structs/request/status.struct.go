@@ -3,15 +3,26 @@ package request
 import "github.com/snowpal/go-status-sdk/lib/structs/common"
 
 type StatusReqBody struct {
-	MemberId     string              `json:"memberID"`
-	StatusDate   string              `json:"statusDate"`
-	PlanForToday common.PlanForToday `json:"planForToday"`
-	Sessions     []common.Session    `json:"sessions"`
-	BlockedBy    common.BlockedBy    `json:"blockedBy"`
+	MemberId     string           `json:"memberID"`
+	StatusDate   string           `json:"statusDate"`
+	PlanForToday PlanForToday     `json:"planForToday"`
+	Sessions     []SessionReqBody `json:"sessions"`
+	BlockedBy    BlockedBy        `json:"blockedBy"`
+}
+
+type PlanForToday struct {
+	Tickets    []TicketReqBody `json:"tickets"`
+	OtherItems []string        `json:"otherItems"`
+}
+
+type BlockedBy struct {
+	Tickets    []TicketReqBody       `json:"tickets"`
+	OtherItems []string              `json:"otherItems"`
+	Members    []common.PairedMember `json:"members"`
 }
 
 type StatusOtherItemsReqBody struct {
-	StatusOtherItems []string `json:"otherItems"`
+	OtherItems []string `json:"otherItems"`
 }
 
 type TeamParam struct {
@@ -32,20 +43,4 @@ type SessionParam struct {
 	MemberId  string
 	StatusId  string
 	SessionId string
-}
-
-type TicketParam struct {
-	TeamId    string
-	MemberId  string
-	StatusId  string
-	SessionId string
-	TicketId  string
-}
-
-type OtherItemParam struct {
-	TeamId      string
-	MemberId    string
-	StatusId    string
-	SessionId   string
-	OtherItemId string
 }

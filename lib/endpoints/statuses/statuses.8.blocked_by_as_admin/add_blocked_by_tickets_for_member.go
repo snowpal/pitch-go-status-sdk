@@ -16,13 +16,13 @@ func AddBlockedByTicketsForMember(
 	jwtToken string,
 	reqBody request.AddTicketsReqBody,
 	statusParam request.StatusParam,
-) (response.Status, error) {
-	var resStatus response.Status
+) ([]response.Ticket, error) {
+	var resTickets response.Tickets
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	var route string
@@ -34,14 +34,14 @@ func AddBlockedByTicketsForMember(
 	)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodPost, route, payload)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -50,7 +50,7 @@ func AddBlockedByTicketsForMember(
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -59,13 +59,13 @@ func AddBlockedByTicketsForMember(
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
-	err = json.Unmarshal(body, &resStatus)
+	err = json.Unmarshal(body, &resTickets.Tickets)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
-	return resStatus, nil
+	return resTickets.Tickets, nil
 }

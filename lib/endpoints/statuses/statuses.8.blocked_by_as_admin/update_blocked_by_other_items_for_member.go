@@ -16,13 +16,13 @@ func UpdateBlockedByOtherItemsForMember(
 	jwtToken string,
 	reqBody request.StatusOtherItemsReqBody,
 	statusParam request.StatusParam,
-) (response.Status, error) {
-	var resStatus response.Status
+) (response.StatusOtherItems, error) {
+	var resOtherItems response.StatusOtherItems
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems, err
 	}
 
 	var route string
@@ -34,14 +34,14 @@ func UpdateBlockedByOtherItemsForMember(
 	)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodPatch, route, payload)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -50,7 +50,7 @@ func UpdateBlockedByOtherItemsForMember(
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -59,13 +59,13 @@ func UpdateBlockedByOtherItemsForMember(
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems, err
 	}
 
-	err = json.Unmarshal(body, &resStatus)
+	err = json.Unmarshal(body, &resOtherItems)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems, err
 	}
-	return resStatus, nil
+	return resOtherItems, nil
 }

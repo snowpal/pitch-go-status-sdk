@@ -16,13 +16,13 @@ func AddSessionTickets(
 	jwtToken string,
 	reqBody request.AddSessionTicketsReqBody,
 	sessionParam request.SessionParam,
-) (response.Status, error) {
-	var resStatus response.Status
+) ([]response.SessionTicket, error) {
+	var resTickets response.SessionTickets
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	var route string
@@ -34,14 +34,14 @@ func AddSessionTickets(
 	)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodPost, route, payload)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -50,7 +50,7 @@ func AddSessionTickets(
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -59,13 +59,13 @@ func AddSessionTickets(
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
-	err = json.Unmarshal(body, &resStatus)
+	err = json.Unmarshal(body, &resTickets)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
-	return resStatus, nil
+	return resTickets.Tickets, nil
 }

@@ -8,22 +8,21 @@ import (
 
 	"github.com/snowpal/go-status-sdk/lib"
 	"github.com/snowpal/go-status-sdk/lib/helpers"
-	"github.com/snowpal/go-status-sdk/lib/structs/common"
 	"github.com/snowpal/go-status-sdk/lib/structs/request"
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
 func UpdateSessionOtherItemForMember(
 	jwtToken string,
-	reqBody common.SessionOtherItemReqBody,
+	reqBody request.SessionOtherItemReqBody,
 	otherItemParam request.OtherItemParam,
-) (response.Status, error) {
-	var resStatus response.Status
+) ([]response.SessionOtherItem, error) {
+	var resOtherItems response.SessionOtherItems
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems.OtherItems, err
 	}
 
 	var route string
@@ -37,14 +36,14 @@ func UpdateSessionOtherItemForMember(
 	)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems.OtherItems, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodPatch, route, payload)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems.OtherItems, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -53,7 +52,7 @@ func UpdateSessionOtherItemForMember(
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems.OtherItems, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -62,13 +61,13 @@ func UpdateSessionOtherItemForMember(
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems.OtherItems, err
 	}
 
-	err = json.Unmarshal(body, &resStatus)
+	err = json.Unmarshal(body, &resOtherItems.OtherItems)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resOtherItems.OtherItems, err
 	}
-	return resStatus, nil
+	return resOtherItems.OtherItems, nil
 }
