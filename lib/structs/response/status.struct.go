@@ -1,6 +1,6 @@
 package response
 
-import "github.com/snowpal/go-status-sdk/lib/structs/common"
+import "github.com/snowpal/pitch-go-status-sdk/lib/structs/common"
 
 type Statuses struct {
 	Statuses []Status `json:"statuses"`

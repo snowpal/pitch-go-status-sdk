@@ -3,10 +3,10 @@ package recipes
 import (
 	"fmt"
 
-	"github.com/snowpal/go-status-sdk/lib"
-	"github.com/snowpal/go-status-sdk/lib/endpoints/registration"
-	"github.com/snowpal/go-status-sdk/lib/structs/request"
-	"github.com/snowpal/go-status-sdk/lib/structs/response"
+	"github.com/snowpal/pitch-go-status-sdk/lib"
+	"github.com/snowpal/pitch-go-status-sdk/lib/endpoints/registration"
+	"github.com/snowpal/pitch-go-status-sdk/lib/structs/request"
+	"github.com/snowpal/pitch-go-status-sdk/lib/structs/response"
 
 	log "github.com/sirupsen/logrus"
 )
