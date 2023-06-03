@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/snowpal/go-status-sdk/lib/config"
-	"github.com/snowpal/go-status-sdk/lib/recipes"
+	"github.com/snowpal/pitch-go-status-sdk/lib/config"
+	"github.com/snowpal/pitch-go-status-sdk/lib/recipes"
 
 	log "github.com/sirupsen/logrus"
 )
