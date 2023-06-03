@@ -12,37 +12,38 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func UpdateBlockedByTicketForMember(
+func UpdateSessionOtherItemForMember(
 	jwtToken string,
-	reqBody request.TicketReqBody,
-	ticketParam request.TicketParam,
-) (response.Ticket, error) {
-	var resTicket response.Ticket
+	reqBody request.SessionOtherItemReqBody,
+	otherItemParam request.OtherItemParam,
+) ([]response.SessionOtherItem, error) {
+	var resOtherItems response.SessionOtherItems
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
 		fmt.Println(err)
-		return resTicket, err
+		return resOtherItems.OtherItems, err
 	}
 
 	var route string
 	route, err = helpers.GetRoute(
-		lib.RouteStatusesUpdateBlockedByTicketForMember,
-		ticketParam.TeamId,
-		ticketParam.MemberId,
-		ticketParam.StatusId,
-		ticketParam.TicketId,
+		lib.RouteStatusesUpdateSessionOtherItemForMember,
+		otherItemParam.TeamId,
+		otherItemParam.MemberId,
+		otherItemParam.StatusId,
+		otherItemParam.SessionId,
+		otherItemParam.OtherItemId,
 	)
 	if err != nil {
 		fmt.Println(err)
-		return resTicket, err
+		return resOtherItems.OtherItems, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodPatch, route, payload)
 	if err != nil {
 		fmt.Println(err)
-		return resTicket, err
+		return resOtherItems.OtherItems, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -51,7 +52,7 @@ func UpdateBlockedByTicketForMember(
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resTicket, err
+		return resOtherItems.OtherItems, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -60,13 +61,13 @@ func UpdateBlockedByTicketForMember(
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resTicket, err
+		return resOtherItems.OtherItems, err
 	}
 
-	err = json.Unmarshal(body, &resTicket)
+	err = json.Unmarshal(body, &resOtherItems.OtherItems)
 	if err != nil {
 		fmt.Println(err)
-		return resTicket, err
+		return resOtherItems.OtherItems, err
 	}
-	return resTicket, nil
+	return resOtherItems.OtherItems, nil
 }

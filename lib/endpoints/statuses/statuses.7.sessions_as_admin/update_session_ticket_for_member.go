@@ -12,27 +12,38 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func UpdateSessionTicketForMember(jwtToken string, reqBody request.TicketReqBody, statusParam request.StatusParam) (response.Status, error) {
-	var resStatus response.Status
+func UpdateSessionTicketForMember(
+	jwtToken string,
+	reqBody request.SessionTicketReqBody,
+	ticketParam request.TicketParam,
+) ([]response.SessionTicket, error) {
+	var resTickets response.SessionTickets
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	var route string
-	route, err = helpers.GetRoute(lib.RouteStatusesUpdateSessionTicketForMember, statusParam.TeamId, statusParam.MemberId, statusParam.StatusId, statusParam.TicketId)
+	route, err = helpers.GetRoute(
+		lib.RouteStatusesUpdateSessionTicketForMember,
+		ticketParam.TeamId,
+		ticketParam.MemberId,
+		ticketParam.StatusId,
+		ticketParam.SessionId,
+		ticketParam.TicketId,
+	)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodPatch, route, payload)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -41,7 +52,7 @@ func UpdateSessionTicketForMember(jwtToken string, reqBody request.TicketReqBody
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -50,13 +61,13 @@ func UpdateSessionTicketForMember(jwtToken string, reqBody request.TicketReqBody
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
-	err = json.Unmarshal(body, &resStatus)
+	err = json.Unmarshal(body, &resTickets.Tickets)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
-	return resStatus, nil
+	return resTickets.Tickets, nil
 }

@@ -12,27 +12,36 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func AddSessionTickets(jwtToken string, reqBody request.AddTicketsReqBody, statusParam request.StatusParam) (response.Status, error) {
-	var resStatus response.Status
+func AddSessionTickets(
+	jwtToken string,
+	reqBody request.AddSessionTicketsReqBody,
+	sessionParam request.SessionParam,
+) ([]response.SessionTicket, error) {
+	var resTickets response.SessionTickets
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	var route string
-	route, err = helpers.GetRoute(lib.RouteStatusesAddSessionTickets, statusParam.TeamId, statusParam.StatusId, statusParam.SessionId)
+	route, err = helpers.GetRoute(
+		lib.RouteStatusesAddSessionTickets,
+		sessionParam.TeamId,
+		sessionParam.StatusId,
+		sessionParam.SessionId,
+	)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodPost, route, payload)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -41,7 +50,7 @@ func AddSessionTickets(jwtToken string, reqBody request.AddTicketsReqBody, statu
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -50,13 +59,13 @@ func AddSessionTickets(jwtToken string, reqBody request.AddTicketsReqBody, statu
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
 
-	err = json.Unmarshal(body, &resStatus)
+	err = json.Unmarshal(body, &resTickets)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resTickets.Tickets, err
 	}
-	return resStatus, nil
+	return resTickets.Tickets, nil
 }

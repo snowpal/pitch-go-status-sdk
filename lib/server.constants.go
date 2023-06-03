@@ -36,6 +36,10 @@ const (
 )
 
 const (
+	RouteProvisioningCreateDatabaseIndexes = "/db/create-indexes"
+)
+
+const (
 	RoutesMetaGetStatusFilters = "/status/filters"
 	RoutesMetaGetRoles         = "/roles"
 )
@@ -46,21 +50,6 @@ const (
 	RouteProfilesGetProfileByEmail = "/profiles/by-email/%s"
 	RouteProfilesGetMyProfile      = "/profiles"
 	RouteProfilesUpdateProfile     = "/profiles"
-)
-
-const (
-	RoutePullRequestsGetTeamPullRequests   = "/teams/%s/pull-requests"
-	RoutePullRequestsGetMemberPullRequests = "/members/%s/pull-requests"
-)
-
-const (
-	RouteStoryPointsGetTeamStoryPoints   = "/teams/%s/story-points"
-	RouteStoryPointsGetMemberStoryPoints = "/members/%s/story-points"
-)
-
-const (
-	RouteTicketsGetTeamTickets   = "/teams/%s/tickets"
-	RouteTicketsGetMemberTickets = "/members/%s/story-points"
 )
 
 const (
@@ -78,55 +67,61 @@ const (
 	RouteStatusesUpdatePftTicket     = "/teams/%s/statuses/%s/plan-for-today/tickets/%s"
 	RouteStatusesUpdatePftOtherItems = "/teams/%s/statuses/%s/plan-for-today/other-items"
 	RouteStatusesDeletePftTicket     = "/teams/%s/statuses/%s/plan-for-today/tickets/%s"
+	RouteStatusesDeletePftOtherItems = "/teams/%s/statuses/%s/plan-for-today/other-items"
 )
 
 const (
-	RouteStatusesAddSessionTickets       = "/teams/%s/statuses/%s/sessions/%s/tickets"
-	RouteStatusesUpdateSessionTicket     = "/teams/%s/statuses/%s/sessions/%s/tickets/%s"
-	RouteStatusesUpdateSessionOtherItems = "/teams/%s/statuses/%s/plan-for-today/other-items"
-	RouteStatusesDeleteSessionTicket     = "/teams/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesAddSessionTickets      = "/teams/%s/statuses/%s/sessions/%s/tickets"
+	RouteStatusesAddSessions            = "/teams/%s/statuses/%s/sessions"
+	RouteStatusesAddSessionOtherItems   = "/teams/%s/statuses/%s/sessions/%s/other-items"
+	RouteStatusesUpdateSessionTicket    = "/teams/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesUpdateSessionOtherItem = "/teams/%s/statuses/%s/sessions/%s/other-items/%s"
+	RouteStatusesDeleteSessionTicket    = "/teams/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesDeleteSession          = "/teams/%s/statuses/%s/sessions/%s"
+	RouteStatusesDeleteSessionOtherItem = "/teams/%s/statuses/%s/sessions/%s/other-items/%s"
 )
 
 const (
-	RouteStatusesAddBlockedByTickets  = "/teams/%s/statuses/%s/blocked-by/tickets"
-	RouteStatusesUpdateBlockeByTicket = "/teams/%s/statuses/%s/blocked-by/tickets/%s"
-	RouteStatusesDeleteBlockeByTicket = "/teams/%s/statuses/%s/blocked-by/tickets/%s"
+	RouteStatusesAddBlockedByTickets       = "/teams/%s/statuses/%s/blocked-by/tickets"
+	RouteStatusesUpdateBlockedByTicket     = "/teams/%s/statuses/%s/blocked-by/tickets/%s"
+	RouteStatusesUpdateBlockedByOtherItems = "/teams/%s/statuses/%s/blocked-by/other-items"
+	RouteStatusesDeleteBlockedByTicket     = "/teams/%s/statuses/%s/blocked-by/tickets/%s"
+	RouteStatusesDeleteBlockedByOtherItems = "/teams/%s/statuses/%s/blocked-by/other-items"
 )
 
 const (
-	RouteStatusesAddStatus = "/teams/%s/members/%s/statuses"
+	RouteStatusesAddStatusForMember            = "/teams/%s/members/%s/statuses"
+	RouteStatusesGetTeamStatuses               = "/teams/%s/members/statuses"
+	RouteStatusesGetStatusesForMember          = "/teams/%s/members/%s/statuses"
+	RouteStatusesGetStatusByIdForMember        = "/teams/%s/members/%s/statuses/by-id/%s"
+	RouteStatusesGetStatusByDateForMember      = "/teams/%s/members/%s/statuses/by-date/%s"
+	RouteStatusesGetStatusByDateRangeForMember = "/teams/%s/members/%s/statuses/by-date-range?startDate=%s&endDate=%s"
+	RouteStatusesDeleteStatusForMember         = "/teams/%s/members/%s/statuses/%s"
 )
 
 const (
-	RouteStatusesAddPftTicketsForMember   = "/teams/%s/members/%s/statuses/%s/plan-for-today/tickets"
-	RouteStatusesUpdatePftTicketForMember = "/teams/%s/members/%s/statuses/%s/plan-for-today/tickets/%s"
-	RouteStatusesDeletePftTicketForMember = "/teams/%s/members/%s/statuses/%s/plan-for-today/tickets/%s"
+	RouteStatusesAddPftTicketsForMember       = "/teams/%s/members/%s/statuses/%s/plan-for-today/tickets"
+	RouteStatusesUpdatePftTicketForMember     = "/teams/%s/members/%s/statuses/%s/plan-for-today/tickets/%s"
+	RouteStatusesUpdatePftOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/plan-for-today/other-items"
+	RouteStatusesDeletePftTicketForMember     = "/teams/%s/members/%s/statuses/%s/plan-for-today/tickets/%s"
+	RouteStatusesDeletePftOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/plan-for-today/other-items"
 )
 
 const (
-	RouteStatusesAddSessionTicketsForMember   = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets"
-	RouteStatusesUpdateSessionTicketForMember = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets/%s"
-	RouteStatusesDeleteSessionTicketForMember = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesAddSessionTicketsForMember      = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets"
+	RouteStatusesAddSessionsForMember            = "/teams/%s/members/%s/statuses/%s/sessions"
+	RouteStatusesAddSessionOtherItemsForMember   = "/teams/%s/members/%s/statuses/%s/sessions/%s/other-items"
+	RouteStatusesUpdateSessionTicketForMember    = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesUpdateSessionOtherItemForMember = "/teams/%s/members/%s/statuses/%s/sessions/%s/other-items/%s"
+	RouteStatusesDeleteSessionTicketForMember    = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesDeleteSessionForMember          = "/teams/%s/members/%s/statuses/%s/sessions/%s"
+	RouteStatusesDeleteSessionOtherItemForMember = "/teams/%s/members/%s/statuses/%s/sessions/%s/other-items/%s"
 )
 
 const (
-	RouteStatusesAddBlockedByTicketsForMember  = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets"
-	RouteStatusesUpdateBlockeByTicketForMember = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets/%s"
-	RouteStatusesDeleteBlockeByTicketForMember = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets/%s"
-)
-
-const (
-	RouteStatusesGetMemberStatuses  = "/members/%s/statuses"
-	RouteStatusesGetMemberStatus    = "/members/%s/statuses/%s"
-	RouteStatusesGetAllTeamStatuses = "/teams/statuses"
-	RouteStatusesUpdateMemberStatus = "/members/%s/statuses/%s"
-	RouteStatusesUpdateMyStatus     = "/statuses/%s"
-	RouteStatusesDeleteMyStatuses   = "/statuses"
-	RouteStatusesDeleteTeamStatuses = "/teams/%s/statuses"
-)
-
-const (
-	RouteSearchSrchStatuses = "/search/statuses"
-	RouteSearchSrchTeams    = "/search/teams"
-	RouteSearchSrchMembers  = "/search/members"
+	RouteStatusesAddBlockedByTicketsForMember       = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets"
+	RouteStatusesUpdateBlockedByTicketForMember     = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets/%s"
+	RouteStatusesUpdateBlockedByOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/blocked-by/other-items"
+	RouteStatusesDeleteBlockedByTicketForMember     = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets/%s"
+	RouteStatusesDeleteBlockedByOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/blocked-by/other-items"
 )

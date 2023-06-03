@@ -15,7 +15,7 @@ import (
 func GetStatusByDateRange(jwtToken string, statusParam request.StatusParam) (response.Status, error) {
 	var resStatus response.Status
 
-	route, err := helpers.GetRoute(lib.RouteStatusesGetStatusByDate, statusParam.TeamId, statusParam.StartDate, statusParam.EndDate)
+	route, err := helpers.GetRoute(lib.RouteStatusesGetStatusByDateRange, statusParam.TeamId, statusParam.StartDate, statusParam.EndDate)
 	if err != nil {
 		fmt.Println(err)
 		return resStatus, err
