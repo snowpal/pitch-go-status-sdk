@@ -10,6 +10,12 @@ Check out the recipes to get a sense of what the underlying API has to offer. He
 	)
 
 	func main() {
+		var err error
+		if config.Files, err = config.InitConfigFiles(); err != nil {
+			log.Fatal(err.Error())
+			return
+		}
+
 		recipeID := 1
 		switch recipeID {
 		case 1:

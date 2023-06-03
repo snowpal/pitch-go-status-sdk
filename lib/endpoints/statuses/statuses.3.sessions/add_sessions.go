@@ -12,37 +12,31 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func UpdateBlockedByTicketForMember(
+func AddSessions(
 	jwtToken string,
-	reqBody request.TicketReqBody,
-	ticketParam request.TicketParam,
-) (response.Ticket, error) {
-	var resTicket response.Ticket
+	reqBody request.AddSessionsReqBody,
+	statusParam request.StatusParam,
+) ([]response.Session, error) {
+	var resSessions response.Sessions
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
 		fmt.Println(err)
-		return resTicket, err
+		return resSessions.Sessions, err
 	}
 
 	var route string
-	route, err = helpers.GetRoute(
-		lib.RouteStatusesUpdateBlockedByTicketForMember,
-		ticketParam.TeamId,
-		ticketParam.MemberId,
-		ticketParam.StatusId,
-		ticketParam.TicketId,
-	)
+	route, err = helpers.GetRoute(lib.RouteStatusesAddSessions, statusParam.TeamId, statusParam.StatusId)
 	if err != nil {
 		fmt.Println(err)
-		return resTicket, err
+		return resSessions.Sessions, err
 	}
 
 	var req *http.Request
-	req, err = http.NewRequest(http.MethodPatch, route, payload)
+	req, err = http.NewRequest(http.MethodPost, route, payload)
 	if err != nil {
 		fmt.Println(err)
-		return resTicket, err
+		return resSessions.Sessions, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -51,7 +45,7 @@ func UpdateBlockedByTicketForMember(
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resTicket, err
+		return resSessions.Sessions, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -60,13 +54,13 @@ func UpdateBlockedByTicketForMember(
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resTicket, err
+		return resSessions.Sessions, err
 	}
 
-	err = json.Unmarshal(body, &resTicket)
+	err = json.Unmarshal(body, &resSessions)
 	if err != nil {
 		fmt.Println(err)
-		return resTicket, err
+		return resSessions.Sessions, err
 	}
-	return resTicket, nil
+	return resSessions.Sessions, nil
 }

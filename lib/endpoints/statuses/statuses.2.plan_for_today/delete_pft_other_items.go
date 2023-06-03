@@ -6,10 +6,11 @@ import (
 
 	"github.com/snowpal/go-status-sdk/lib"
 	"github.com/snowpal/go-status-sdk/lib/helpers"
+	"github.com/snowpal/go-status-sdk/lib/structs/request"
 )
 
-func DeleteTeamStatuses(jwtToken string, teamId string) error {
-	route, err := helpers.GetRoute(lib.RouteStatusesDeleteTeamStatuses, teamId)
+func DeletePftOtherItems(jwtToken string, statusParam request.StatusParam) error {
+	route, err := helpers.GetRoute(lib.RouteStatusesDeletePftOtherItems, statusParam.TeamId, statusParam.StatusId)
 	if err != nil {
 		fmt.Println(err)
 		return err

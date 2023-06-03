@@ -1,4 +1,4 @@
-package members
+package statuses
 
 import (
 	"fmt"
@@ -6,17 +6,18 @@ import (
 
 	"github.com/snowpal/go-status-sdk/lib"
 	"github.com/snowpal/go-status-sdk/lib/helpers"
+	"github.com/snowpal/go-status-sdk/lib/structs/request"
 )
 
-func CreateDatabaseIndexes(jwtToken string) error {
-	route, err := helpers.GetRoute(lib.RouteProvisioningCreateDatabaseIndexes)
+func DeleteBlockedByOtherItems(jwtToken string, statusParam request.StatusParam) error {
+	route, err := helpers.GetRoute(lib.RouteStatusesDeleteBlockedByOtherItems, statusParam.TeamId, statusParam.StatusId)
 	if err != nil {
 		fmt.Println(err)
 		return err
 	}
 
 	var req *http.Request
-	req, err = http.NewRequest(http.MethodPatch, route, nil)
+	req, err = http.NewRequest(http.MethodDelete, route, nil)
 	if err != nil {
 		fmt.Println(err)
 		return err
@@ -29,6 +30,5 @@ func CreateDatabaseIndexes(jwtToken string) error {
 		fmt.Println(err)
 		return err
 	}
-
 	return nil
 }
