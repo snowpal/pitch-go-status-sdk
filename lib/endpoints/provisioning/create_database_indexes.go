@@ -9,7 +9,7 @@ import (
 )
 
 func CreateDatabaseIndexes(jwtToken string) error {
-	route, err := helpers.GetRoute(lib.RouteMembersAddMemberToTeam)
+	route, err := helpers.GetRoute(lib.RouteProvisioningCreateDatabaseIndexes)
 	if err != nil {
 		fmt.Println(err)
 		return err

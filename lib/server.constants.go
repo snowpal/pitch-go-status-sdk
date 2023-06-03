@@ -36,6 +36,10 @@ const (
 )
 
 const (
+	RouteProvisioningCreateDatabaseIndexes = "/db/create-indexes"
+)
+
+const (
 	RoutesMetaGetStatusFilters = "/status/filters"
 	RoutesMetaGetRoles         = "/roles"
 )
