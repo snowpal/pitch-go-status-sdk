@@ -8,13 +8,14 @@ import (
 
 	"github.com/snowpal/go-status-sdk/lib"
 	"github.com/snowpal/go-status-sdk/lib/helpers"
+	"github.com/snowpal/go-status-sdk/lib/structs/request"
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func GetMemberStatuses(jwtToken string, memberId string) ([]response.Status, error) {
+func GetStatusesForMember(jwtToken string, teamParam request.TeamParam) ([]response.Status, error) {
 	var resStatuses response.Statuses
 
-	route, err := helpers.GetRoute(lib.RouteStatusesGetMemberStatuses, memberId)
+	route, err := helpers.GetRoute(lib.RouteStatusesGetStatusesForMember, teamParam.TeamId, teamParam.MemberId)
 	if err != nil {
 		fmt.Println(err)
 		return resStatuses.Statuses, err

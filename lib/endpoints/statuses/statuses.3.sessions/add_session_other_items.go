@@ -12,7 +12,11 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func AddSessionOtherItems(jwtToken string, reqBody request.StatusSessionOtherItemsReqBody, statusParam request.StatusParam) (response.Status, error) {
+func AddSessionOtherItems(
+	jwtToken string,
+	reqBody request.StatusSessionOtherItemsReqBody,
+	sessionParam request.SessionParam,
+) (response.Status, error) {
 	var resStatus response.Status
 
 	payload, err := helpers.GetRequestPayload(reqBody)
@@ -22,7 +26,12 @@ func AddSessionOtherItems(jwtToken string, reqBody request.StatusSessionOtherIte
 	}
 
 	var route string
-	route, err = helpers.GetRoute(lib.RouteStatusesAddSessionOtherItems, statusParam.TeamId, statusParam.StatusId, statusParam.SessionId)
+	route, err = helpers.GetRoute(
+		lib.RouteStatusesAddSessionOtherItems,
+		sessionParam.TeamId,
+		sessionParam.StatusId,
+		sessionParam.SessionId,
+	)
 	if err != nil {
 		fmt.Println(err)
 		return resStatus, err

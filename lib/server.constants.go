@@ -49,21 +49,6 @@ const (
 )
 
 const (
-	RoutePullRequestsGetTeamPullRequests   = "/teams/%s/pull-requests"
-	RoutePullRequestsGetMemberPullRequests = "/members/%s/pull-requests"
-)
-
-const (
-	RouteStoryPointsGetTeamStoryPoints   = "/teams/%s/story-points"
-	RouteStoryPointsGetMemberStoryPoints = "/members/%s/story-points"
-)
-
-const (
-	RouteTicketsGetTeamTickets   = "/teams/%s/tickets"
-	RouteTicketsGetMemberTickets = "/members/%s/story-points"
-)
-
-const (
 	RouteStatusesAddMyStatus          = "/teams/%s/statuses"
 	RouteStatusesGetMyStatuses        = "/teams/%s/statuses"
 	RouteStatusesGetAllMyStatuses     = "/statuses"
@@ -101,7 +86,13 @@ const (
 )
 
 const (
-	RouteStatusesAddStatus = "/teams/%s/members/%s/statuses"
+	RouteStatusesAddStatusForMember            = "/teams/%s/members/%s/statuses"
+	RouteStatusesGetTeamStatuses               = "/teams/%s/members/statuses"
+	RouteStatusesGetStatusesForMember          = "/teams/%s/members/%s/statuses"
+	RouteStatusesGetStatusByIdForMember        = "/teams/%s/members/%s/statuses/by-id/%s"
+	RouteStatusesGetStatusByDateForMember      = "/teams/%s/members/%s/statuses/by-date/%s"
+	RouteStatusesGetStatusByDateRangeForMember = "/teams/%s/members/%s/statuses/by-date-range?startDate=%s&endDate=%s"
+	RouteStatusesDeleteStatusForMember         = "/teams/%s/members/%s/statuses/%s"
 )
 
 const (
@@ -129,20 +120,4 @@ const (
 	RouteStatusesUpdateBlockedByOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/blocked-by/other-items"
 	RouteStatusesDeleteBlockedByTicketForMember     = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets/%s"
 	RouteStatusesDeleteBlockedByOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/blocked-by/other-items"
-)
-
-const (
-	RouteStatusesGetMemberStatuses  = "/members/%s/statuses"
-	RouteStatusesGetMemberStatus    = "/members/%s/statuses/%s"
-	RouteStatusesGetAllTeamStatuses = "/teams/statuses"
-	RouteStatusesUpdateMemberStatus = "/members/%s/statuses/%s"
-	RouteStatusesUpdateMyStatus     = "/statuses/%s"
-	RouteStatusesDeleteMyStatuses   = "/statuses"
-	RouteStatusesDeleteTeamStatuses = "/teams/%s/statuses"
-)
-
-const (
-	RouteSearchSrchStatuses = "/search/statuses"
-	RouteSearchSrchTeams    = "/search/teams"
-	RouteSearchSrchMembers  = "/search/members"
 )

@@ -9,8 +9,14 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/request"
 )
 
-func DeleteSessionTicket(jwtToken string, statusParam request.StatusParam) error {
-	route, err := helpers.GetRoute(lib.RouteStatusesDeleteSessionTicket, statusParam.TeamId, statusParam.StatusId, statusParam.SessionId, statusParam.TicketId)
+func DeleteSessionTicket(jwtToken string, ticketParam request.TicketParam) error {
+	route, err := helpers.GetRoute(
+		lib.RouteStatusesDeleteSessionTicket,
+		ticketParam.TeamId,
+		ticketParam.StatusId,
+		ticketParam.SessionId,
+		ticketParam.TicketId,
+	)
 	if err != nil {
 		fmt.Println(err)
 		return err

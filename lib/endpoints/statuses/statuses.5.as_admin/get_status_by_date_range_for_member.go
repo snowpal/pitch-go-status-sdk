@@ -12,20 +12,26 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func GetMyStatuses(jwtToken string, teamParam request.TeamParam) ([]response.Status, error) {
-	var resStatuses response.Statuses
+func GetStatusByDateRangeForMember(jwtToken string, statusParam request.StatusParam) (response.Status, error) {
+	var resStatus response.Status
 
-	route, err := helpers.GetRoute(lib.RouteStatusesGetMyStatuses, teamParam.TeamId)
+	route, err := helpers.GetRoute(
+		lib.RouteStatusesGetStatusByDateRangeForMember,
+		statusParam.TeamId,
+		statusParam.MemberId,
+		statusParam.StartDate,
+		statusParam.EndDate,
+	)
 	if err != nil {
 		fmt.Println(err)
-		return resStatuses.Statuses, err
+		return resStatus, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodGet, route, nil)
 	if err != nil {
 		fmt.Println(err)
-		return resStatuses.Statuses, err
+		return resStatus, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -34,7 +40,7 @@ func GetMyStatuses(jwtToken string, teamParam request.TeamParam) ([]response.Sta
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resStatuses.Statuses, err
+		return resStatus, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -43,13 +49,13 @@ func GetMyStatuses(jwtToken string, teamParam request.TeamParam) ([]response.Sta
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resStatuses.Statuses, err
+		return resStatus, err
 	}
 
-	err = json.Unmarshal(body, &resStatuses)
+	err = json.Unmarshal(body, &resStatus)
 	if err != nil {
 		fmt.Println(err)
-		return resStatuses.Statuses, err
+		return resStatus, err
 	}
-	return resStatuses.Statuses, nil
+	return resStatus, nil
 }

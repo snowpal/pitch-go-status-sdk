@@ -12,7 +12,11 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func AddSessionTicketsForMember(jwtToken string, reqBody request.AddTicketsReqBody, statusParam request.StatusParam) (response.Status, error) {
+func AddSessionTicketsForMember(
+	jwtToken string,
+	reqBody request.AddSessionTicketsReqBody,
+	sessionParam request.SessionParam,
+) (response.Status, error) {
 	var resStatus response.Status
 
 	payload, err := helpers.GetRequestPayload(reqBody)
@@ -22,7 +26,13 @@ func AddSessionTicketsForMember(jwtToken string, reqBody request.AddTicketsReqBo
 	}
 
 	var route string
-	route, err = helpers.GetRoute(lib.RouteStatusesAddSessionTicketsForMember, statusParam.TeamId, statusParam.MemberId, statusParam.StatusId, statusParam.SessionId)
+	route, err = helpers.GetRoute(
+		lib.RouteStatusesAddSessionTicketsForMember,
+		sessionParam.TeamId,
+		sessionParam.MemberId,
+		sessionParam.StatusId,
+		sessionParam.SessionId,
+	)
 	if err != nil {
 		fmt.Println(err)
 		return resStatus, err

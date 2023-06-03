@@ -12,7 +12,11 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func AddBlockedByTickets(jwtToken string, reqBody request.AddTicketsReqBody, statusParam request.StatusParam) (response.Status, error) {
+func AddBlockedByTickets(
+	jwtToken string,
+	reqBody request.AddTicketsReqBody,
+	statusParam request.StatusParam,
+) (response.Status, error) {
 	var resStatus response.Status
 
 	payload, err := helpers.GetRequestPayload(reqBody)

@@ -10,7 +10,12 @@ import (
 )
 
 func DeletePftOtherItemsForMember(jwtToken string, statusParam request.StatusParam) error {
-	route, err := helpers.GetRoute(lib.RouteStatusesDeletePftOtherItemsForMember, statusParam.TeamId, statusParam.MemberId, statusParam.StatusId)
+	route, err := helpers.GetRoute(
+		lib.RouteStatusesDeletePftOtherItemsForMember,
+		statusParam.TeamId,
+		statusParam.MemberId,
+		statusParam.StatusId,
+	)
 	if err != nil {
 		fmt.Println(err)
 		return err

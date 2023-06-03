@@ -12,7 +12,11 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func AddSessions(jwtToken string, reqBody request.AddSessionsReqBody, statusParam request.StatusParam) (response.Status, error) {
+func AddSessions(
+	jwtToken string,
+	reqBody request.AddSessionsReqBody,
+	statusParam request.StatusParam,
+) (response.Status, error) {
 	var resStatus response.Status
 
 	payload, err := helpers.GetRequestPayload(reqBody)

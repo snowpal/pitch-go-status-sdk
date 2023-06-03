@@ -12,27 +12,20 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func UpdateMyStatus(jwtToken string, reqBody request.StatusReqBody, statusId string) (response.Status, error) {
-	var resStatus response.Status
+func GetTeamStatuses(jwtToken string, teamParam request.TeamParam) ([]response.Status, error) {
+	var resStatuses response.Statuses
 
-	payload, err := helpers.GetRequestPayload(reqBody)
+	route, err := helpers.GetRoute(lib.RouteStatusesGetTeamStatuses, teamParam.TeamId)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
-	}
-
-	var route string
-	route, err = helpers.GetRoute(lib.RouteStatusesUpdateMyStatus, statusId)
-	if err != nil {
-		fmt.Println(err)
-		return resStatus, err
+		return resStatuses.Statuses, err
 	}
 
 	var req *http.Request
-	req, err = http.NewRequest(http.MethodGet, route, payload)
+	req, err = http.NewRequest(http.MethodGet, route, nil)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resStatuses.Statuses, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -41,7 +34,7 @@ func UpdateMyStatus(jwtToken string, reqBody request.StatusReqBody, statusId str
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resStatuses.Statuses, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -50,13 +43,13 @@ func UpdateMyStatus(jwtToken string, reqBody request.StatusReqBody, statusId str
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resStatuses.Statuses, err
 	}
 
-	err = json.Unmarshal(body, &resStatus)
+	err = json.Unmarshal(body, &resStatuses)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resStatuses.Statuses, err
 	}
-	return resStatus, nil
+	return resStatuses.Statuses, nil
 }

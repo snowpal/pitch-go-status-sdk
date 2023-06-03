@@ -9,8 +9,13 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/request"
 )
 
-func DeleteBlockedByTicket(jwtToken string, statusParam request.StatusParam) error {
-	route, err := helpers.GetRoute(lib.RouteStatusesDeleteBlockedByTicket, statusParam.TeamId, statusParam.StatusId, statusParam.TicketId)
+func DeleteBlockedByTicket(jwtToken string, ticketParam request.TicketParam) error {
+	route, err := helpers.GetRoute(
+		lib.RouteStatusesDeleteBlockedByTicket,
+		ticketParam.TeamId,
+		ticketParam.StatusId,
+		ticketParam.TicketId,
+	)
 	if err != nil {
 		fmt.Println(err)
 		return err

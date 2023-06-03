@@ -1,48 +1,35 @@
 package request
 
-type AddSessionsReqBody struct {
-	Sessions []Session `json:"sessions"`
-}
+import "github.com/snowpal/go-status-sdk/lib/structs/common"
 
-type Session struct {
-	Tickets    []TicketReqBody           `json:"tickets"`
-	OtherItems []SessionOtherItemReqBody `json:"otherItems"`
+type AddSessionsReqBody struct {
+	Sessions []common.Session `json:"sessions"`
 }
 
 type StatusSessionOtherItemsReqBody struct {
-	SessionOtherItems []SessionOtherItemReqBody `json:"otherItems"`
+	SessionOtherItems []common.SessionOtherItemReqBody `json:"otherItems"`
 }
 
-type SessionOtherItemReqBody struct {
-	Title         string         `json:"title"`
-	Type          string         `json:"type"`
-	TimeSpent     float32        `json:"timeSpent"`
-	PairedMembers []PairedMember `json:"pairedWith"`
-	Comment       string         `json:"comment"`
+type AddSessionTicketsReqBody struct {
+	Tickets []SessionTicketReqBody `json:"tickets"`
+}
+
+type SessionTicketReqBody struct {
+	ID            string                `json:"ticketID"`
+	Type          string                `json:"type"`
+	Url           string                `json:"url"`
+	Description   string                `json:"description"`
+	Status        string                `json:"status"`
+	TimeSpent     float32               `json:"timeSpent"`
+	PullRequest   PullRequest           `json:"pullRequest"`
+	PairedMembers []common.PairedMember `json:"pairedWith"`
 }
 
 type AddTicketsReqBody struct {
-	Tickets []TicketReqBody `json:"tickets"`
-}
-
-type TicketReqBody struct {
-	ID            string         `json:"ticketID"`
-	Type          string         `json:"type"`
-	Url           string         `json:"url"`
-	Description   string         `json:"description"`
-	Status        string         `json:"status"`
-	Pionts        int            `json:"points"`
-	TimeSpent     float32        `json:"timeSpent"`
-	PullRequest   PullRequest    `json:"pullRequest"`
-	PairedMembers []PairedMember `json:"pairedWith"`
+	Tickets []common.TicketReqBody `json:"tickets"`
 }
 
 type PullRequest struct {
 	Url         string `json:"url"`
 	Description string `json:"description"`
-}
-
-type PairedMember struct {
-	MemberId      string `json:"memberID"`
-	NonMemberName string `json:"nonMemberName"`
 }

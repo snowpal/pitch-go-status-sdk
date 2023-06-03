@@ -8,11 +8,16 @@ import (
 
 	"github.com/snowpal/go-status-sdk/lib"
 	"github.com/snowpal/go-status-sdk/lib/helpers"
+	"github.com/snowpal/go-status-sdk/lib/structs/common"
 	"github.com/snowpal/go-status-sdk/lib/structs/request"
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func UpdateSessionOtherItem(jwtToken string, reqBody request.SessionOtherItemReqBody, statusParam request.StatusParam) (response.Status, error) {
+func UpdateSessionOtherItem(
+	jwtToken string,
+	reqBody common.SessionOtherItemReqBody,
+	otherItemParam request.OtherItemParam,
+) (response.Status, error) {
 	var resStatus response.Status
 
 	payload, err := helpers.GetRequestPayload(reqBody)
@@ -22,7 +27,13 @@ func UpdateSessionOtherItem(jwtToken string, reqBody request.SessionOtherItemReq
 	}
 
 	var route string
-	route, err = helpers.GetRoute(lib.RouteStatusesUpdateSessionOtherItem, statusParam.TeamId, statusParam.StatusId, statusParam.SessionId, statusParam.OtherItemId)
+	route, err = helpers.GetRoute(
+		lib.RouteStatusesUpdateSessionOtherItem,
+		otherItemParam.TeamId,
+		otherItemParam.StatusId,
+		otherItemParam.SessionId,
+		otherItemParam.OtherItemId,
+	)
 	if err != nil {
 		fmt.Println(err)
 		return resStatus, err

@@ -12,7 +12,11 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func UpdatePftOtherItemsForMember(jwtToken string, reqBody request.StatusOtherItemsReqBody, statusParam request.StatusParam) (response.Status, error) {
+func UpdatePftOtherItemsForMember(
+	jwtToken string,
+	reqBody request.StatusOtherItemsReqBody,
+	statusParam request.StatusParam,
+) (response.Status, error) {
 	var resStatus response.Status
 
 	payload, err := helpers.GetRequestPayload(reqBody)
@@ -22,7 +26,12 @@ func UpdatePftOtherItemsForMember(jwtToken string, reqBody request.StatusOtherIt
 	}
 
 	var route string
-	route, err = helpers.GetRoute(lib.RouteStatusesUpdatePftOtherItemsForMember, statusParam.TeamId, statusParam.MemberId, statusParam.StatusId)
+	route, err = helpers.GetRoute(
+		lib.RouteStatusesUpdatePftOtherItemsForMember,
+		statusParam.TeamId,
+		statusParam.MemberId,
+		statusParam.StatusId,
+	)
 	if err != nil {
 		fmt.Println(err)
 		return resStatus, err

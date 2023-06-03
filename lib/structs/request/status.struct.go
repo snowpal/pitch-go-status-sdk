@@ -1,25 +1,51 @@
 package request
 
+import "github.com/snowpal/go-status-sdk/lib/structs/common"
+
 type StatusReqBody struct {
-	Text            string `json:"text"`
-	TaggedMemberIds string `json:"taggedMemberIds"`
+	MemberId     string              `json:"memberID"`
+	StatusDate   string              `json:"statusDate"`
+	PlanForToday common.PlanForToday `json:"planForToday"`
+	Sessions     []common.Session    `json:"sessions"`
+	BlockedBy    common.BlockedBy    `json:"blockedBy"`
 }
 
 type StatusOtherItemsReqBody struct {
-	OtherStatusItems []string `json:"otherItems"`
+	StatusOtherItems []string `json:"otherItems"`
 }
 
 type TeamParam struct {
-	TeamId string
+	TeamId   string
+	MemberId string
 }
 
 type StatusParam struct {
+	TeamId    string
+	MemberId  string
+	StatusId  string
+	StartDate string
+	EndDate   string
+}
+
+type SessionParam struct {
+	TeamId    string
+	MemberId  string
+	StatusId  string
+	SessionId string
+}
+
+type TicketParam struct {
+	TeamId    string
+	MemberId  string
+	StatusId  string
+	SessionId string
+	TicketId  string
+}
+
+type OtherItemParam struct {
 	TeamId      string
-	StatusId    string
-	StartDate   string
-	EndDate     string
-	SessionId   string
 	MemberId    string
-	TicketId    string
+	StatusId    string
+	SessionId   string
 	OtherItemId string
 }
