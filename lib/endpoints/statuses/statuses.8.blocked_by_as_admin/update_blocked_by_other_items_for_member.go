@@ -12,7 +12,7 @@ import (
 	"github.com/snowpal/go-status-sdk/lib/structs/response"
 )
 
-func UpdateBlockedByTicket(jwtToken string, reqBody request.TicketReqBody, statusParam request.StatusParam) (response.Status, error) {
+func UpdateBlockedByOtherItemsForMember(jwtToken string, reqBody request.StatusOtherItemsReqBody, statusParam request.StatusParam) (response.Status, error) {
 	var resStatus response.Status
 
 	payload, err := helpers.GetRequestPayload(reqBody)
@@ -22,7 +22,7 @@ func UpdateBlockedByTicket(jwtToken string, reqBody request.TicketReqBody, statu
 	}
 
 	var route string
-	route, err = helpers.GetRoute(lib.RouteStatusesUpdateBlockedByTicket, statusParam.TeamId, statusParam.StatusId, statusParam.TicketId)
+	route, err = helpers.GetRoute(lib.RouteStatusesUpdateBlockedByOtherItemsForMember, statusParam.TeamId, statusParam.MemberId, statusParam.StatusId)
 	if err != nil {
 		fmt.Println(err)
 		return resStatus, err

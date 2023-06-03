@@ -78,19 +78,23 @@ const (
 	RouteStatusesUpdatePftTicket     = "/teams/%s/statuses/%s/plan-for-today/tickets/%s"
 	RouteStatusesUpdatePftOtherItems = "/teams/%s/statuses/%s/plan-for-today/other-items"
 	RouteStatusesDeletePftTicket     = "/teams/%s/statuses/%s/plan-for-today/tickets/%s"
+	RouteStatusesDeletePftOtherItems = "/teams/%s/statuses/%s/plan-for-today/other-items"
 )
 
 const (
 	RouteStatusesAddSessionTickets       = "/teams/%s/statuses/%s/sessions/%s/tickets"
 	RouteStatusesUpdateSessionTicket     = "/teams/%s/statuses/%s/sessions/%s/tickets/%s"
-	RouteStatusesUpdateSessionOtherItems = "/teams/%s/statuses/%s/plan-for-today/other-items"
+	RouteStatusesUpdateSessionOtherItems = "/teams/%s/statuses/%s/sessions/%s/other-items"
 	RouteStatusesDeleteSessionTicket     = "/teams/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesDeleteSessionOtherItems = "/teams/%s/statuses/%s/sessions/%s/other-items"
 )
 
 const (
-	RouteStatusesAddBlockedByTickets  = "/teams/%s/statuses/%s/blocked-by/tickets"
-	RouteStatusesUpdateBlockeByTicket = "/teams/%s/statuses/%s/blocked-by/tickets/%s"
-	RouteStatusesDeleteBlockeByTicket = "/teams/%s/statuses/%s/blocked-by/tickets/%s"
+	RouteStatusesAddBlockedByTickets       = "/teams/%s/statuses/%s/blocked-by/tickets"
+	RouteStatusesUpdateBlockedByTicket     = "/teams/%s/statuses/%s/blocked-by/tickets/%s"
+	RouteStatusesUpdateBlockedByOtherItems = "/teams/%s/statuses/%s/blocked-by/other-items"
+	RouteStatusesDeleteBlockedByTicket     = "/teams/%s/statuses/%s/blocked-by/tickets/%s"
+	RouteStatusesDeleteBlockedByOtherItems = "/teams/%s/statuses/%s/blocked-by/other-items"
 )
 
 const (
@@ -98,21 +102,27 @@ const (
 )
 
 const (
-	RouteStatusesAddPftTicketsForMember   = "/teams/%s/members/%s/statuses/%s/plan-for-today/tickets"
-	RouteStatusesUpdatePftTicketForMember = "/teams/%s/members/%s/statuses/%s/plan-for-today/tickets/%s"
-	RouteStatusesDeletePftTicketForMember = "/teams/%s/members/%s/statuses/%s/plan-for-today/tickets/%s"
+	RouteStatusesAddPftTicketsForMember       = "/teams/%s/members/%s/statuses/%s/plan-for-today/tickets"
+	RouteStatusesUpdatePftTicketForMember     = "/teams/%s/members/%s/statuses/%s/plan-for-today/tickets/%s"
+	RouteStatusesUpdatePftOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/plan-for-today/other-items"
+	RouteStatusesDeletePftTicketForMember     = "/teams/%s/members/%s/statuses/%s/plan-for-today/tickets/%s"
+	RouteStatusesDeletePftOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/plan-for-today/other-items"
 )
 
 const (
-	RouteStatusesAddSessionTicketsForMember   = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets"
-	RouteStatusesUpdateSessionTicketForMember = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets/%s"
-	RouteStatusesDeleteSessionTicketForMember = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesAddSessionTicketsForMember       = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets"
+	RouteStatusesUpdateSessionTicketForMember     = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesUpdateSessionOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/sessions/%s/other-items"
+	RouteStatusesDeleteSessionTicketForMember     = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesDeleteSessionOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/sessions/%s/other-items"
 )
 
 const (
-	RouteStatusesAddBlockedByTicketsForMember  = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets"
-	RouteStatusesUpdateBlockeByTicketForMember = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets/%s"
-	RouteStatusesDeleteBlockeByTicketForMember = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets/%s"
+	RouteStatusesAddBlockedByTicketsForMember       = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets"
+	RouteStatusesUpdateBlockedByTicketForMember     = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets/%s"
+	RouteStatusesUpdateBlockedByOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/blocked-by/other-items"
+	RouteStatusesDeleteBlockedByTicketForMember     = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets/%s"
+	RouteStatusesDeleteBlockedByOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/blocked-by/other-items"
 )
 
 const (

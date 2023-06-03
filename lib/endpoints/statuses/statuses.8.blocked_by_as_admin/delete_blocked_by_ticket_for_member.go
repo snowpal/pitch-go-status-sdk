@@ -10,7 +10,7 @@ import (
 )
 
 func DeleteBlockedByTicketForMember(jwtToken string, statusParam request.StatusParam) error {
-	route, err := helpers.GetRoute(lib.RouteStatusesDeleteBlockeByTicketForMember, statusParam.TeamId, statusParam.MemberId, statusParam.StatusId, statusParam.TicketId)
+	route, err := helpers.GetRoute(lib.RouteStatusesDeleteBlockedByTicketForMember, statusParam.TeamId, statusParam.MemberId, statusParam.StatusId, statusParam.TicketId)
 	if err != nil {
 		fmt.Println(err)
 		return err

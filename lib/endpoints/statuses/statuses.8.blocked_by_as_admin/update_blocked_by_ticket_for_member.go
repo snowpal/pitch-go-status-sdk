@@ -22,7 +22,7 @@ func UpdateBlockedByTicketForMember(jwtToken string, reqBody request.TicketReqBo
 	}
 
 	var route string
-	route, err = helpers.GetRoute(lib.RouteStatusesUpdateBlockeByTicketForMember, statusParam.TeamId, statusParam.MemberId, statusParam.StatusId, statusParam.TicketId)
+	route, err = helpers.GetRoute(lib.RouteStatusesUpdateBlockedByTicketForMember, statusParam.TeamId, statusParam.MemberId, statusParam.StatusId, statusParam.TicketId)
 	if err != nil {
 		fmt.Println(err)
 		return resStatus, err

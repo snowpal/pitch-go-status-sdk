@@ -22,7 +22,7 @@ func UpdateSessionTicketForMember(jwtToken string, reqBody request.TicketReqBody
 	}
 
 	var route string
-	route, err = helpers.GetRoute(lib.RouteStatusesUpdateSessionTicketForMember, statusParam.TeamId, statusParam.MemberId, statusParam.StatusId, statusParam.TicketId)
+	route, err = helpers.GetRoute(lib.RouteStatusesUpdateSessionTicketForMember, statusParam.TeamId, statusParam.MemberId, statusParam.StatusId, statusParam.SessionId, statusParam.TicketId)
 	if err != nil {
 		fmt.Println(err)
 		return resStatus, err
