@@ -82,11 +82,14 @@ const (
 )
 
 const (
-	RouteStatusesAddSessionTickets       = "/teams/%s/statuses/%s/sessions/%s/tickets"
-	RouteStatusesUpdateSessionTicket     = "/teams/%s/statuses/%s/sessions/%s/tickets/%s"
-	RouteStatusesUpdateSessionOtherItems = "/teams/%s/statuses/%s/sessions/%s/other-items"
-	RouteStatusesDeleteSessionTicket     = "/teams/%s/statuses/%s/sessions/%s/tickets/%s"
-	RouteStatusesDeleteSessionOtherItems = "/teams/%s/statuses/%s/sessions/%s/other-items"
+	RouteStatusesAddSessionTickets      = "/teams/%s/statuses/%s/sessions/%s/tickets"
+	RouteStatusesAddSessions            = "/teams/%s/statuses/%s/sessions"
+	RouteStatusesAddSessionOtherItems   = "/teams/%s/statuses/%s/sessions/%s/other-items"
+	RouteStatusesUpdateSessionTicket    = "/teams/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesUpdateSessionOtherItem = "/teams/%s/statuses/%s/sessions/%s/other-items/%s"
+	RouteStatusesDeleteSessionTicket    = "/teams/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesDeleteSession          = "/teams/%s/statuses/%s/sessions/%s"
+	RouteStatusesDeleteSessionOtherItem = "/teams/%s/statuses/%s/sessions/%s/other-items/%s"
 )
 
 const (

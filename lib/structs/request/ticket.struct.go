@@ -1,5 +1,9 @@
 package request
 
+type AddSessionsReqBody struct {
+	Sessions []AddTicketsReqBody `json:"sessions"`
+}
+
 type AddTicketsReqBody struct {
 	Tickets []TicketReqBody `json:"tickets"`
 }
