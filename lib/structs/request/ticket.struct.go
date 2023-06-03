@@ -1,7 +1,24 @@
 package request
 
 type AddSessionsReqBody struct {
-	Sessions []AddTicketsReqBody `json:"sessions"`
+	Sessions []Session `json:"sessions"`
+}
+
+type Session struct {
+	Tickets    []TicketReqBody           `json:"tickets"`
+	OtherItems []SessionOtherItemReqBody `json:"otherItems"`
+}
+
+type StatusSessionOtherItemsReqBody struct {
+	SessionOtherItems []SessionOtherItemReqBody `json:"otherItems"`
+}
+
+type SessionOtherItemReqBody struct {
+	Title         string         `json:"title"`
+	Type          string         `json:"type"`
+	TimeSpent     float32        `json:"timeSpent"`
+	PairedMembers []PairedMember `json:"pairedWith"`
+	Comment       string         `json:"comment"`
 }
 
 type AddTicketsReqBody struct {

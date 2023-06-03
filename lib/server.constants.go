@@ -113,11 +113,14 @@ const (
 )
 
 const (
-	RouteStatusesAddSessionTicketsForMember       = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets"
-	RouteStatusesUpdateSessionTicketForMember     = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets/%s"
-	RouteStatusesUpdateSessionOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/sessions/%s/other-items"
-	RouteStatusesDeleteSessionTicketForMember     = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets/%s"
-	RouteStatusesDeleteSessionOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/sessions/%s/other-items"
+	RouteStatusesAddSessionTicketsForMember      = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets"
+	RouteStatusesAddSessionsForMember            = "/teams/%s/members/%s/statuses/%s/sessions"
+	RouteStatusesAddSessionOtherItemsForMember   = "/teams/%s/members/%s/statuses/%s/sessions/%s/other-items"
+	RouteStatusesUpdateSessionTicketForMember    = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesUpdateSessionOtherItemForMember = "/teams/%s/members/%s/statuses/%s/sessions/%s/other-items/%s"
+	RouteStatusesDeleteSessionTicketForMember    = "/teams/%s/members/%s/statuses/%s/sessions/%s/tickets/%s"
+	RouteStatusesDeleteSessionForMember          = "/teams/%s/members/%s/statuses/%s/sessions/%s"
+	RouteStatusesDeleteSessionOtherItemForMember = "/teams/%s/members/%s/statuses/%s/sessions/%s/other-items/%s"
 )
 
 const (
