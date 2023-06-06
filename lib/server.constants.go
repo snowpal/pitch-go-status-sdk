@@ -32,7 +32,7 @@ const (
 const (
 	RouteMembersAddMemberToTeam      = "/teams/%s/members"
 	RouteMembersGetTeamMembers       = "/teams/%s/members"
-	RouteMembersDeleteMemberFromTeam = "/teams/%s/members/%s"
+	RouteMembersDeleteMemberFromTeam = "/teams/%s/members"
 )
 
 const (
@@ -83,9 +83,12 @@ const (
 
 const (
 	RouteStatusesAddBlockedByTickets       = "/teams/%s/statuses/%s/blocked-by/tickets"
+	RouteStatusesAddBlockedByMembers       = "/teams/%s/statuses/%s/blocked-by/members"
 	RouteStatusesUpdateBlockedByTicket     = "/teams/%s/statuses/%s/blocked-by/tickets/%s"
+	RouteStatusesUpdateBlockedByMember     = "/teams/%s/statuses/%s/blocked-by/members/%s"
 	RouteStatusesUpdateBlockedByOtherItems = "/teams/%s/statuses/%s/blocked-by/other-items"
 	RouteStatusesDeleteBlockedByTicket     = "/teams/%s/statuses/%s/blocked-by/tickets/%s"
+	RouteStatusesDeleteBlockedByMember     = "/teams/%s/statuses/%s/blocked-by/members/%s"
 	RouteStatusesDeleteBlockedByOtherItems = "/teams/%s/statuses/%s/blocked-by/other-items"
 )
 
@@ -93,9 +96,9 @@ const (
 	RouteStatusesAddStatusForMember            = "/teams/%s/members/%s/statuses"
 	RouteStatusesGetTeamStatuses               = "/teams/%s/members/statuses"
 	RouteStatusesGetStatusesForMember          = "/teams/%s/members/%s/statuses"
-	RouteStatusesGetStatusByIdForMember        = "/teams/%s/members/%s/statuses/by-id/%s"
-	RouteStatusesGetStatusByDateForMember      = "/teams/%s/members/%s/statuses/by-date/%s"
-	RouteStatusesGetStatusByDateRangeForMember = "/teams/%s/members/%s/statuses/by-date-range?startDate=%s&endDate=%s"
+	RouteStatusesGetStatusByIdForMember        = "/teams/%s/statuses/by-id/%s"
+	RouteStatusesGetStatusByDateForMember      = "/teams/%s/statuses/by-date/%s?memberId=%s"
+	RouteStatusesGetStatusByDateRangeForMember = "/teams/%s/statuses/by-date-range?memberId=%s&startDate=%s&endDate=%s"
 	RouteStatusesDeleteStatusForMember         = "/teams/%s/members/%s/statuses/%s"
 )
 
@@ -120,8 +123,11 @@ const (
 
 const (
 	RouteStatusesAddBlockedByTicketsForMember       = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets"
+	RouteStatusesAddBlockedByMembersForMember       = "/teams/%s/members/%s/statuses/%s/blocked-by/members"
 	RouteStatusesUpdateBlockedByTicketForMember     = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets/%s"
 	RouteStatusesUpdateBlockedByOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/blocked-by/other-items"
+	RouteStatusesUpdateBlockedByMemberForMember     = "/teams/%s/members/%s/statuses/%s/blocked-by/members/%s"
 	RouteStatusesDeleteBlockedByTicketForMember     = "/teams/%s/members/%s/statuses/%s/blocked-by/tickets/%s"
 	RouteStatusesDeleteBlockedByOtherItemsForMember = "/teams/%s/members/%s/statuses/%s/blocked-by/other-items"
+	RouteStatusesDeleteBlockedByMemberForMember     = "/teams/%s/members/%s/statuses/%s/blocked-by/members/%s"
 )

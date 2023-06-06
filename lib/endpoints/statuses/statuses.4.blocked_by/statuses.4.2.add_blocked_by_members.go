@@ -1,4 +1,4 @@
-package members
+package statuses
 
 import (
 	"encoding/json"
@@ -8,20 +8,33 @@ import (
 
 	"github.com/snowpal/pitch-go-status-sdk/lib"
 	"github.com/snowpal/pitch-go-status-sdk/lib/helpers"
+	"github.com/snowpal/pitch-go-status-sdk/lib/structs/common"
+	"github.com/snowpal/pitch-go-status-sdk/lib/structs/request"
 	"github.com/snowpal/pitch-go-status-sdk/lib/structs/response"
 )
 
-func GetTeamMembers(jwtToken string, teamId string) ([]response.Member, error) {
-	var resMembers response.Members
+func AddBlockedByMembers(
+	jwtToken string,
+	reqBody request.BlockPairedMembersReqBody,
+	statusParam request.StatusParam,
+) ([]common.PairedMember, error) {
+	var resMembers response.BlockPairedMembers
 
-	route, err := helpers.GetRoute(lib.RouteMembersGetTeamMembers, teamId)
+	payload, err := helpers.GetRequestPayload(reqBody)
+	if err != nil {
+		fmt.Println(err)
+		return resMembers.Members, err
+	}
+
+	var route string
+	route, err = helpers.GetRoute(lib.RouteStatusesAddBlockedByMembers, statusParam.TeamId, statusParam.StatusId)
 	if err != nil {
 		fmt.Println(err)
 		return resMembers.Members, err
 	}
 
 	var req *http.Request
-	req, err = http.NewRequest(http.MethodGet, route, nil)
+	req, err = http.NewRequest(http.MethodPost, route, payload)
 	if err != nil {
 		fmt.Println(err)
 		return resMembers.Members, err
@@ -45,7 +58,7 @@ func GetTeamMembers(jwtToken string, teamId string) ([]response.Member, error) {
 		return resMembers.Members, err
 	}
 
-	err = json.Unmarshal(body, &resMembers)
+	err = json.Unmarshal(body, &resMembers.Members)
 	if err != nil {
 		fmt.Println(err)
 		return resMembers.Members, err

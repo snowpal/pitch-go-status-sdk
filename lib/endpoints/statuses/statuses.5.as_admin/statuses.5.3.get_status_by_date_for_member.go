@@ -12,13 +12,14 @@ import (
 	"github.com/snowpal/pitch-go-status-sdk/lib/structs/response"
 )
 
-func GetStatusByIdForMember(jwtToken string, statusParam request.StatusParam) (response.Status, error) {
+func GetStatusByDateForMember(jwtToken string, statusParam request.StatusParam) (response.Status, error) {
 	var resStatus response.Status
 
-	route, err := helpers.GetRoute(lib.RouteStatusesGetStatusByIdForMember,
+	route, err := helpers.GetRoute(
+		lib.RouteStatusesGetStatusByDateForMember,
 		statusParam.TeamId,
+		statusParam.StartDate,
 		statusParam.MemberId,
-		statusParam.StatusId,
 	)
 	if err != nil {
 		fmt.Println(err)

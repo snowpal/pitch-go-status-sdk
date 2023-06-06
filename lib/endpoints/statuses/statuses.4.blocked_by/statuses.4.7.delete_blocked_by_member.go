@@ -1,4 +1,4 @@
-package members
+package statuses
 
 import (
 	"fmt"
@@ -9,8 +9,13 @@ import (
 	"github.com/snowpal/pitch-go-status-sdk/lib/structs/request"
 )
 
-func DeleteMemberFromTeam(jwtToken string, param request.TeamMemberParam) error {
-	route, err := helpers.GetRoute(lib.RouteMembersDeleteMemberFromTeam, param.TeamId, param.MemberId)
+func DeleteBlockedByMember(jwtToken string, blockedByMemberParam request.BlockedByMemberParam) error {
+	route, err := helpers.GetRoute(
+		lib.RouteStatusesDeleteBlockedByMember,
+		blockedByMemberParam.TeamId,
+		blockedByMemberParam.StatusId,
+		blockedByMemberParam.BlockedByMemberId,
+	)
 	if err != nil {
 		fmt.Println(err)
 		return err
