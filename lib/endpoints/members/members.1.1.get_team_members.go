@@ -1,4 +1,4 @@
-package statuses
+package members
 
 import (
 	"encoding/json"
@@ -8,29 +8,24 @@ import (
 
 	"github.com/snowpal/pitch-go-status-sdk/lib"
 	"github.com/snowpal/pitch-go-status-sdk/lib/helpers"
-	"github.com/snowpal/pitch-go-status-sdk/lib/structs/request"
+	"github.com/snowpal/pitch-go-status-sdk/lib/structs/common"
 	"github.com/snowpal/pitch-go-status-sdk/lib/structs/response"
 )
 
-func GetStatusByDateForMember(jwtToken string, statusParam request.StatusParam) (response.Status, error) {
-	var resStatus response.Status
+func GetTeamMembers(jwtToken string, teamId string) ([]common.Member, error) {
+	var resMembers response.Members
 
-	route, err := helpers.GetRoute(
-		lib.RouteStatusesGetStatusByDateForMember,
-		statusParam.TeamId,
-		statusParam.MemberId,
-		statusParam.StartDate,
-	)
+	route, err := helpers.GetRoute(lib.RouteMembersGetTeamMembers, teamId)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resMembers.Members, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodGet, route, nil)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resMembers.Members, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -39,7 +34,7 @@ func GetStatusByDateForMember(jwtToken string, statusParam request.StatusParam) 
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resMembers.Members, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -48,13 +43,13 @@ func GetStatusByDateForMember(jwtToken string, statusParam request.StatusParam) 
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resMembers.Members, err
 	}
 
-	err = json.Unmarshal(body, &resStatus)
+	err = json.Unmarshal(body, &resMembers)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resMembers.Members, err
 	}
-	return resStatus, nil
+	return resMembers.Members, nil
 }

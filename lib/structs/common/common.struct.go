@@ -1,5 +1,10 @@
 package common
 
+type Member struct {
+	ID   string `json:"id"`
+	Role string `json:"role"`
+}
+
 type PairedMember struct {
 	MemberId      string   `json:"memberID"`
 	NonMemberName string   `json:"nonMemberName"`

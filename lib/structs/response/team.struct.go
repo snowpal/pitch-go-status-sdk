@@ -1,5 +1,7 @@
 package response
 
+import "github.com/snowpal/pitch-go-status-sdk/lib/structs/common"
+
 type Teams struct {
 	Teams []Team `json:"teams"`
 }
@@ -10,11 +12,9 @@ type Team struct {
 }
 
 type Members struct {
-	Members []Member `json:"members"`
+	Members []common.Member `json:"members"`
 }
 
-type Member struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
-	Team Team   `json:"team"`
+type BlockPairedMembers struct {
+	Members []common.PairedMember `json:"members"`
 }
