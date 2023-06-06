@@ -18,7 +18,7 @@ func AddMembersToTeam(
 	reqBody request.MembersReqBody,
 	teamId string,
 ) ([]common.Member, error) {
-	var resMembers response.Member
+	var resMembers response.Members
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
