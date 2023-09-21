@@ -8,7 +8,7 @@ type AddSessionsReqBody struct {
 
 type SessionReqBody struct {
 	SequenceId int                       `json:"sequenceId"`
-	Tickets    []TicketReqBody           `json:"tickets"`
+	Tickets    []SessionTicketReqBody    `json:"tickets"`
 	OtherItems []SessionOtherItemReqBody `json:"otherItems"`
 }
 
