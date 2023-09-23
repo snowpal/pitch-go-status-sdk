@@ -10,8 +10,11 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func ReportMyStatusForDay(user response.User, teamID string, memberID string, statusDate string) (response.Status, error) {
-	log.Info("User with ", user.Email, " is reporting status for ", statusDate)
+func ReportMyStatusForDay(user response.User, team response.Team,
+	statusDate string) (response.Status, error) {
+	log.Printf("User with %s is reporting status for %s", user.Email, statusDate)
+
+	var memberID = team.Members[1].ID // Pick a random member to pair with
 	recipes.SleepBefore()
 	resStatus, err := statuses.AddMyStatus(user.JwtToken, request.StatusReqBody{
 		StatusDate: statusDate,
@@ -22,13 +25,13 @@ func ReportMyStatusForDay(user response.User, teamID string, memberID string, st
 		Sessions: []request.SessionReqBody{
 			{
 				SequenceId: 1,
-				Tickets:    session1Tickets(memberID),
-				OtherItems: session1OtherItems(),
+				Tickets:    sessionOneTickets(memberID),
+				OtherItems: sessionOneOtherItems(),
 			},
 			{
 				SequenceId: 2,
-				Tickets:    session2Tickets(memberID),
-				OtherItems: session2OtherItems(memberID),
+				Tickets:    sessionTwoTickets(memberID),
+				OtherItems: sessionTwoOtherItems(memberID),
 			},
 		},
 		BlockedBy: request.BlockedBy{
@@ -37,19 +40,19 @@ func ReportMyStatusForDay(user response.User, teamID string, memberID string, st
 			OtherItems: blockedByOtherItems(),
 		},
 	}, request.TeamParam{
-		TeamId: teamID,
+		TeamId: team.ID,
 	})
 	if err != nil {
 		return resStatus, err
 	}
 	recipes.SleepAfter()
-	log.Info(".User with ", user.Email, " has reported status for ", statusDate)
+	log.Printf(".User with %s has reported status for %s", user.Email, statusDate)
 
 	return resStatus, nil
 }
 
-// private functions
-
+// NOTE: We use hardcoded values simply for illustration purposes. In the real world, you would be
+// constructing these via params, of course.
 func pftTickets() []request.TicketReqBody {
 	return []request.TicketReqBody{
 		{
@@ -63,7 +66,7 @@ func pftTickets() []request.TicketReqBody {
 	}
 }
 
-func session1Tickets(memberID string) []request.SessionTicketReqBody {
+func sessionOneTickets(memberID string) []request.SessionTicketReqBody {
 	return []request.SessionTicketReqBody{
 		{
 			TicketID:    "GH123",
@@ -84,7 +87,7 @@ func session1Tickets(memberID string) []request.SessionTicketReqBody {
 	}
 }
 
-func session2Tickets(memberID string) []request.SessionTicketReqBody {
+func sessionTwoTickets(memberID string) []request.SessionTicketReqBody {
 	return []request.SessionTicketReqBody{
 		{
 			TicketID:    "GH124",
@@ -135,7 +138,7 @@ func pftOtherItems() []string {
 	}
 }
 
-func session1OtherItems() []request.SessionOtherItemReqBody {
+func sessionOneOtherItems() []request.SessionOtherItemReqBody {
 	return []request.SessionOtherItemReqBody{
 		{
 			Title:     "Feature discussion with Raj",
@@ -149,7 +152,7 @@ func session1OtherItems() []request.SessionOtherItemReqBody {
 	}
 }
 
-func session2OtherItems(memberID string) []request.SessionOtherItemReqBody {
+func sessionTwoOtherItems(memberID string) []request.SessionOtherItemReqBody {
 	return []request.SessionOtherItemReqBody{
 		{
 			Title:     "Bug discussion with Kumar",

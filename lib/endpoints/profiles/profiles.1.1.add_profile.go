@@ -17,7 +17,6 @@ func AddProfile(jwtToken string, reqBody request.ProfileReqBody) (response.Profi
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
-		fmt.Println(err)
 		return resProfile, err
 	}
 

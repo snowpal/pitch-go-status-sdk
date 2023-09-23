@@ -10,9 +10,8 @@ import (
 )
 
 func DisplayMyStatusForDay(user response.User, team response.Team, statusDate string) error {
-	log.Info("Displaying status for ", user.Email, " reported on ", statusDate)
+	log.Printf("Displaying status for %s reported on %s", user.Email, statusDate)
 	recipes.SleepBefore()
-
 	resStatuses, err := statuses.GetStatusByDate(user.JwtToken, request.StatusParam{
 		TeamId:    team.ID,
 		StartDate: statusDate,
@@ -21,20 +20,20 @@ func DisplayMyStatusForDay(user response.User, team response.Team, statusDate st
 		return err
 	}
 
+	// TODO(1, 09/22/23): API returns a list so handle it this way for now.
 	resStatus := resStatuses[0]
-
 	log.Info("Status ID: ", resStatus.ID)
 
-	var ticketsCount = 0
+	var ticketCount = 0
 	for _, session := range resStatus.Sessions {
-		ticketsCount += len(session.Tickets)
+		ticketCount += len(session.Tickets)
 	}
-	log.Info("Session Tickets Count: ", ticketsCount)
+	log.Printf("Cumulative Number of Tickets (across sessions): %d", ticketCount)
 
 	for idx, session := range resStatus.Sessions {
-		log.Info("Session ", idx, " Tickets")
+		log.Printf("Session %d Tickets", idx+1)
 		for _, ticket := range session.Tickets {
-			log.Info("Ticket Url: ", ticket.Url)
+			log.Printf(".Ticket Url: %s", ticket.Url)
 		}
 	}
 

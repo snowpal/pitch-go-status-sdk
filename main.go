@@ -15,7 +15,9 @@ func main() {
 		return
 	}
 
-	recipeID := 2
+	// We require that the first recipe be run before anything else as it registers a bunch of
+	// users.
+	recipeID := 1
 	switch recipeID {
 	case 1:
 		log.Info("Run Recipe1")

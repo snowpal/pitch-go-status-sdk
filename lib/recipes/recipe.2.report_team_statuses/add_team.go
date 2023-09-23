@@ -15,8 +15,8 @@ import (
 
 func AddNewTeam(user response.User, teamName string) (response.Team, error) {
 	var resTeam response.Team
+	log.Printf("Add a new team, %s", teamName)
 
-	log.Info("Adding a new team, ", teamName, ".")
 	recipes.SleepBefore()
 	resTeam, err := teams.AddTeam(
 		user.JwtToken,
@@ -25,7 +25,7 @@ func AddNewTeam(user response.User, teamName string) (response.Team, error) {
 		return resTeam, err
 	}
 	recipes.SleepAfter()
-	log.Info(".Team successfully added and the team id is, ", resTeam.ID)
+	log.Printf(".Team successfully added, ID: %s", resTeam.ID)
 
 	return resTeam, err
 }
@@ -34,7 +34,7 @@ func AddTeamMembers(user response.User, team response.Team) (response.Team, erro
 	var resTeam response.Team
 	var err error
 
-	log.Info("Adding members to team, ", team.Name, ".")
+	log.Printf("Add members to team, %s", team.Name)
 	recipes.SleepBefore()
 	var secondProfile response.Profile
 	secondProfile, err = getUserProfile(lib.SecondUser)
@@ -50,20 +50,18 @@ func AddTeamMembers(user response.User, team response.Team) (response.Team, erro
 
 	resTeam, err = members.AddMembersToTeam(user.JwtToken, request.MembersReqBody{
 		Members: []common.MemberReqBody{
-			{ID: secondProfile.ID, Role: "member"},
-			{ID: thirdProfile.ID, Role: "admin"},
+			{ID: secondProfile.ID, Role: "member"}, // add first member as regular member
+			{ID: thirdProfile.ID, Role: "admin"},   // add second member as admin
 		},
 	}, team.ID)
 	if err != nil {
 		return resTeam, err
 	}
 	recipes.SleepBefore()
-	log.Info(".Members were added to team, ", team.Name, ".")
+	log.Info(".Members were added to team %s", team.Name)
 
 	return resTeam, err
 }
-
-// private functions
 
 func getUserProfile(userEmail string) (response.Profile, error) {
 	var resProfile response.Profile

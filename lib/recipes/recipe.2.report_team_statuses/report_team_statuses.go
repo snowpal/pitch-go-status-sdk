@@ -30,29 +30,32 @@ func AddTeamAndMembersAsAdmin() (response.Team, error) {
 	return team, nil
 }
 
-func ReportStatusAsTeamMember(team response.Team) error {
+func ReportStatusAsATeamMember(team response.Team) error {
+	if len(team.Members) == 0 {
+		return errors.New(".no members in team")
+	}
+
 	user, err := recipes.SignIn(lib.SecondUser, lib.Password)
 	if err != nil {
 		return err
 	}
 
-	if len(team.Members) == 0 {
-		return errors.New(".no members in the team")
-	}
-
-	var statusDate = "2023-05-23T00:00:00Z"
-	_, err = ReportMyStatusForDay(user, team.ID, team.Members[1].ID, statusDate)
+	const statusDate = "2023-05-23T00:00:00Z"
+	_, err = ReportMyStatusForDay(user, team, statusDate)
 	if err != nil {
 		return err
 	}
 
-	DisplayMyStatusForDay(user, team, statusDate)
+	if err = DisplayMyStatusForDay(user, team, statusDate); err != nil {
+		return err
+	}
 
 	return nil
 }
 
 func ReportTeamStatuses() {
-	log.Info("Objective: Add a new team, add couple of members to that and report status for each 1 of them")
+	log.Info("Objective: Add a new team, " +
+		"add couple of members to that and report status for each one of them")
 	_, err := recipes.ValidateDependencies()
 	if err != nil {
 		return
@@ -64,5 +67,7 @@ func ReportTeamStatuses() {
 		return
 	}
 
-	ReportStatusAsTeamMember(team)
+	if err = ReportStatusAsATeamMember(team); err != nil {
+		return
+	}
 }
