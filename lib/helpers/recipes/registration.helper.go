@@ -4,7 +4,9 @@ import (
 	"fmt"
 
 	"github.com/snowpal/pitch-go-status-sdk/lib"
+	"github.com/snowpal/pitch-go-status-sdk/lib/endpoints/profiles"
 	"github.com/snowpal/pitch-go-status-sdk/lib/endpoints/registration"
+	"github.com/snowpal/pitch-go-status-sdk/lib/structs/common"
 	"github.com/snowpal/pitch-go-status-sdk/lib/structs/request"
 	"github.com/snowpal/pitch-go-status-sdk/lib/structs/response"
 
@@ -45,4 +47,29 @@ func SignIn(email string, password string) (response.User, error) {
 	log.Info(".User successfully signed in, acquired JWT token")
 	SleepAfter()
 	return user, nil
+}
+
+func AddNewProfile(user response.User, userID string, firstName string, phoneNumber string) (response.Profile, error) {
+	log.Info("Adding profile for ", user.Email)
+	var resProfile response.Profile
+
+	profileReqBody := request.ProfileReqBody{
+		UserID: userID,
+		Name: common.ProfileName{
+			FirstName: firstName,
+		},
+		PhoneNumbers: []common.PhoneNumber{
+			{Primary: true, PhoneNumber: phoneNumber},
+		},
+		EmailAddresses: []common.EmailAddress{
+			{Primary: true, EmailAddress: user.Email},
+		},
+	}
+	resProfile, err := profiles.AddProfile(user.JwtToken, profileReqBody)
+	if err != nil {
+		return resProfile, err
+	}
+	log.Info(".Profile successfully created for ", user.Email)
+
+	return resProfile, nil
 }

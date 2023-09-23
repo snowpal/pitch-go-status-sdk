@@ -7,8 +7,13 @@ type Teams struct {
 }
 
 type Team struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	ID                  string          `json:"ID"`
+	Name                string          `json:"Name"`
+	Members             []common.Member `json:"Members"`
+	CreatedBy           string          `json:"CreatedBy"`
+	UpdatedBy           string          `json:"UpdatedBy"`
+	LastModifiedOn      string          `json:"LastModifiedOn"`
+	DeletedMembersCount int             `json:"DeletedMembersCount"`
 }
 
 type Members struct {

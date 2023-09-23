@@ -12,20 +12,20 @@ import (
 	"github.com/snowpal/pitch-go-status-sdk/lib/structs/response"
 )
 
-func GetStatusByDate(jwtToken string, statusParam request.StatusParam) (response.Status, error) {
-	var resStatus response.Status
+func GetStatusByDate(jwtToken string, statusParam request.StatusParam) ([]response.Status, error) {
+	var resStatuses []response.Status
 
 	route, err := helpers.GetRoute(lib.RouteStatusesGetStatusByDate, statusParam.TeamId, statusParam.StartDate)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resStatuses, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodGet, route, nil)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resStatuses, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -34,7 +34,7 @@ func GetStatusByDate(jwtToken string, statusParam request.StatusParam) (response
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resStatuses, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -43,13 +43,13 @@ func GetStatusByDate(jwtToken string, statusParam request.StatusParam) (response
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resStatuses, err
 	}
 
-	err = json.Unmarshal(body, &resStatus)
+	err = json.Unmarshal(body, &resStatuses)
 	if err != nil {
 		fmt.Println(err)
-		return resStatus, err
+		return resStatuses, err
 	}
-	return resStatus, nil
+	return resStatuses, nil
 }
