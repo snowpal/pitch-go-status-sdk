@@ -1,46 +1,49 @@
 package response
 
-import "github.com/snowpal/pitch-go-status-sdk/lib/structs/common"
-
 type Tickets struct {
 	Tickets []Ticket `json:"tickets"`
 }
 
 type Ticket struct {
-	ID          string `json:"id"`
-	TicketID    string `json:"ticketID"`
-	Type        string `json:"type"`
-	Url         string `json:"url"`
-	Description string `json:"description"`
-	Status      string `json:"status"`
-	Points      int    `json:"points"`
+	ID          string `json:"ID"`
+	TicketID    string `json:"TicketID"`
+	Type        string `json:"Type"`
+	Url         string `json:"Url"`
+	Description string `json:"Description"`
+	Status      string `json:"Status"`
+	Points      int    `json:"Points"`
 }
 
 type SessionTickets struct {
-	Tickets []SessionTicket `json:"tickets"`
+	Tickets []SessionTicket `json:"Tickets"`
+}
+
+type PullRequest struct {
+	Url         string `json:"Url"`
+	Description string `json:"Description"`
 }
 
 type SessionTicket struct {
-	ID            string                `json:"id"`
-	TicketID      string                `json:"ticketID"`
-	Type          string                `json:"type"`
-	Url           string                `json:"url"`
-	Description   string                `json:"description"`
-	Status        string                `json:"status"`
-	TimeSpent     float32               `json:"timeSpent"`
-	PullRequest   common.PullRequest    `json:"pullRequest"`
-	PairedMembers []common.PairedMember `json:"pairedWith"`
+	ID            string         `json:"ID"`
+	TicketID      string         `json:"TicketID"`
+	Type          string         `json:"Type"`
+	Url           string         `json:"Url"`
+	Description   string         `json:"Description"`
+	Status        string         `json:"Status"`
+	TimeSpent     float32        `json:"TimeSpent"`
+	PullRequest   PullRequest    `json:"PullRequest"`
+	PairedMembers []PairedMember `json:"PairedWith"`
 }
 
 type SessionOtherItem struct {
-	ID            string                `json:"id"`
-	Title         string                `json:"title"`
-	Type          string                `json:"type"`
-	TimeSpent     float32               `json:"timeSpent"`
-	PairedMembers []common.PairedMember `json:"pairedWith"`
-	Comment       string                `json:"comment"`
+	ID            string         `json:"ID"`
+	Title         string         `json:"Title"`
+	Type          string         `json:"Type"`
+	TimeSpent     float32        `json:"TimeSpent"`
+	PairedMembers []PairedMember `json:"PairedWith"`
+	Comment       string         `json:"Comment"`
 }
 
 type SessionOtherItems struct {
-	OtherItems []SessionOtherItem `json:"otherItems"`
+	OtherItems []SessionOtherItem `json:"OtherItems"`
 }

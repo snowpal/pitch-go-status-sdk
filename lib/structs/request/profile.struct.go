@@ -1,7 +1,10 @@
 package request
 
+import "github.com/snowpal/pitch-go-status-sdk/lib/structs/common"
+
 type ProfileReqBody struct {
-	Username  string `json:"username"`
-	FirstName string `json:"firstName"`
-	LastName  string `json:"lastName"`
+	UserID         string                `json:"userID"`
+	Name           common.ProfileName    `json:"Name"`
+	PhoneNumbers   []common.PhoneNumber  `json:"phoneNumbers"`
+	EmailAddresses []common.EmailAddress `json:"emailAddresses"`
 }

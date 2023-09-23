@@ -3,6 +3,13 @@ package lib
 const Password = "Welcome1!"
 
 const (
-	DefaultEmail = "apiuserkp5@gmail.com"
-	ActiveUser   = "apiuser3@gmail.com"
+	DefaultEmail = "api_default@yopmail.com"
+	ActiveUser   = "ak_user1@yopmail.com"
+	SecondUser   = "ak_user2@yopmail.com"
+	ThirdUser    = "ak_user3@yopmail.com"
+	FourthUser   = "ak_user4@yopmail.com"
+)
+
+const (
+	TeamName = "Snowpal Managed Services"
 )
