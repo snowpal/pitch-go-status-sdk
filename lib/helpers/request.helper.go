@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"strings"
 
@@ -55,8 +56,12 @@ func MakeRequest(req *http.Request) (*http.Response, error) {
 	res, err := client.Do(req)
 	successCodes := []int{200, 201, 202, 204}
 	if err != nil || !slices.Contains(successCodes, res.StatusCode) {
-		fmt.Println(err)
-		return res, errors.New("API Request Failed")
+		var body []byte
+		body, err = io.ReadAll(res.Body)
+		if err != nil {
+			return res, errors.New("API Request Failed")
+		}
+		return res, errors.New(fmt.Sprintf("API Request Failed, error: %s", string(body)))
 	}
 	return res, nil
 }
