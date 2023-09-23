@@ -3,7 +3,7 @@ package request
 import "github.com/snowpal/pitch-go-status-sdk/lib/structs/common"
 
 type StatusReqBody struct {
-	MemberId     string           `json:"memberID"`
+	MemberId     *string          `json:"memberID"`
 	StatusDate   string           `json:"statusDate"`
 	PlanForToday PlanForToday     `json:"planForToday"`
 	Sessions     []SessionReqBody `json:"sessions"`

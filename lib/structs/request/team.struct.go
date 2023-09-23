@@ -7,7 +7,7 @@ type TeamReqBody struct {
 }
 
 type MembersReqBody struct {
-	Members []common.Member `json:"members"`
+	Members []common.MemberReqBody `json:"members"`
 }
 
 type BlockPairedMembersReqBody struct {

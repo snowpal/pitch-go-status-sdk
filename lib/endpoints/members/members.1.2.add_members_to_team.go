@@ -8,7 +8,6 @@ import (
 
 	"github.com/snowpal/pitch-go-status-sdk/lib"
 	"github.com/snowpal/pitch-go-status-sdk/lib/helpers"
-	"github.com/snowpal/pitch-go-status-sdk/lib/structs/common"
 	"github.com/snowpal/pitch-go-status-sdk/lib/structs/request"
 	"github.com/snowpal/pitch-go-status-sdk/lib/structs/response"
 )
@@ -17,27 +16,27 @@ func AddMembersToTeam(
 	jwtToken string,
 	reqBody request.MembersReqBody,
 	teamId string,
-) ([]common.Member, error) {
-	var resMembers response.Members
+) (response.Team, error) {
+	var resTeam response.Team
 
 	payload, err := helpers.GetRequestPayload(reqBody)
 	if err != nil {
 		fmt.Println(err)
-		return resMembers.Members, err
+		return resTeam, err
 	}
 
 	var route string
 	route, err = helpers.GetRoute(lib.RouteMembersAddMemberToTeam, teamId)
 	if err != nil {
 		fmt.Println(err)
-		return resMembers.Members, err
+		return resTeam, err
 	}
 
 	var req *http.Request
 	req, err = http.NewRequest(http.MethodPatch, route, payload)
 	if err != nil {
 		fmt.Println(err)
-		return resMembers.Members, err
+		return resTeam, err
 	}
 
 	helpers.AddUserHeaders(jwtToken, req)
@@ -46,7 +45,7 @@ func AddMembersToTeam(
 	res, err = helpers.MakeRequest(req)
 	if err != nil {
 		fmt.Println(err)
-		return resMembers.Members, err
+		return resTeam, err
 	}
 
 	defer helpers.CloseBody(res.Body)
@@ -55,13 +54,13 @@ func AddMembersToTeam(
 	body, err = io.ReadAll(res.Body)
 	if err != nil {
 		fmt.Println(err)
-		return resMembers.Members, err
+		return resTeam, err
 	}
 
-	err = json.Unmarshal(body, &resMembers.Members)
+	err = json.Unmarshal(body, &resTeam)
 	if err != nil {
 		fmt.Println(err)
-		return resMembers.Members, err
+		return resTeam, err
 	}
-	return resMembers.Members, nil
+	return resTeam, nil
 }
